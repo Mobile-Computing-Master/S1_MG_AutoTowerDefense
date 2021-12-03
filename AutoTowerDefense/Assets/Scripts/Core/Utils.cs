@@ -14,5 +14,10 @@ namespace Core
         {
             return vector.x + vector.y;
         }
+
+        public static bool IsInsideRect(Vector3 position, Rect rectangle)
+        {
+            return false;
+        }
     }
 }

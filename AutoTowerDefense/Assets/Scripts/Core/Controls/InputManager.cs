@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
@@ -6,7 +7,12 @@ namespace Core.Controls
 {
     public class InputManager : MonoBehaviour
     {
-        public float speed = 10f;
+        public float leftBorder;
+        public float rightBorder;
+        public float upperBorder;
+        public float lowerBorder;
+        private Rect _trueViewPort;
+        private Rect _innerRect;
         private Camera _mainCamera;
         private Vector3 _startDrag;
         private float _initialZoomDistance;
@@ -15,6 +21,17 @@ namespace Core.Controls
         {
             EnhancedTouchSupport.Enable();
             _mainCamera = Camera.main;
+        }
+
+        private void Start()
+        {
+            // Get a rectangle, that represents the bounds of the camera
+            _trueViewPort = _mainCamera.pixelRect;
+            
+            var topRightVpPosition = _mainCamera.ScreenToWorldPoint(new Vector3(_trueViewPort.width, _trueViewPort.height, 0));
+
+            _innerRect = new Rect(Vector2.zero,
+                new Vector2(Map.Map.width - topRightVpPosition.x * 2, Map.Map.height - topRightVpPosition.y * 2));
         }
 
         private void Update()
@@ -40,12 +57,22 @@ namespace Core.Controls
             if (touch.phase == TouchPhase.Moved)
             {
                 var currentPos = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
-                var delta = _startDrag - currentPos;
 
-                _mainCamera.transform.position += delta;
+                var delta = _startDrag - currentPos;
+                var newPosition = _mainCamera.transform.position + delta;
+
+                _mainCamera.transform.position = ClampToMap(newPosition);
             }
         }
-    
+
+        private Vector3 ClampToMap(Vector3 vector)
+        {
+            vector.x = Mathf.Clamp(vector.x, -_innerRect.width / 2, _innerRect.width / 2);
+            vector.y = Mathf.Clamp(vector.y, -_innerRect.height / 2, _innerRect.height / 2);
+            Debug.Log(vector);
+            return vector;
+        }
+
         // postpone for now
         private void ZoomCamera(Touch touch1, Touch touch2)
         {
