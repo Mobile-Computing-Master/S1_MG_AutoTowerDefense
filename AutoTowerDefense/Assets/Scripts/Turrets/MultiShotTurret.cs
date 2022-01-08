@@ -13,6 +13,11 @@ namespace Turrets
         private readonly HashSet<GameObject> _inRange = new HashSet<GameObject>();
         private float _reloadTime = 0f;
 
+        public override void BuyUpgrade()
+        {
+            throw new System.NotImplementedException();
+        }
+        
         private void Update()
         {
             _reloadTime += Time.deltaTime;

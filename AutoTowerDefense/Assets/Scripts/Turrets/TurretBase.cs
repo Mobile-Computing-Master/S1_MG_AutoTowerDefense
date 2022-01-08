@@ -1,6 +1,8 @@
 using System;
+using Core.GameManager;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Turrets
@@ -12,7 +14,10 @@ namespace Turrets
         public delegate void SelectTurret(bool selected);
         public event SelectTurret OnTurretSelected;
 
+        [Inject]
+        private ILocalGameManager _localGameManager;
         private bool _isSelected;
+        private Collider2D _bodyCollider = null;
 
         private bool IsSelected
         {
@@ -30,8 +35,8 @@ namespace Turrets
             }
         }
 
-        private Collider2D _bodyCollider = null;
-
+        public abstract void BuyUpgrade();
+        
         private void Start()
         {
             var collider = gameObject.GetComponent<CircleCollider2D>();
@@ -45,7 +50,7 @@ namespace Turrets
 
             if (!_bodyCollider) throw new Exception("Attach a body with a 2D collider");
         }
-
+        
         private void DetectClick(Finger finger)
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
@@ -57,6 +62,7 @@ namespace Turrets
                 if (!IsSelected)
                 {
                     IsSelected = true;
+                    _localGameManager.SetSelectedTurret(this);
                 }
             }
             else
