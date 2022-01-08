@@ -69,7 +69,6 @@ namespace Core.Controls
         {
             vector.x = Mathf.Clamp(vector.x, -_innerRect.width / 2, _innerRect.width / 2);
             vector.y = Mathf.Clamp(vector.y, -_innerRect.height / 2, _innerRect.height / 2);
-            Debug.Log(vector);
             return vector;
         }
 

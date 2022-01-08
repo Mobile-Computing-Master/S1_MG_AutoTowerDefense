@@ -1,18 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Turrets;
 using UnityEngine;
 
-public class RangeIndicator : MonoBehaviour
+namespace Turrets
 {
-    private void OnEnable()
+    public class RangeIndicator : MonoBehaviour
     {
-        var turretBase = gameObject.GetComponentInParent<TurretBase>();
+        private void Start()
+        {
+            ChangeVisiblity(false);
+            
+            var turretBase = gameObject.GetComponentInParent<TurretBase>();
 
-        if (!turretBase) throw new Exception("Attach a turret base!");
+            if (!turretBase) throw new Exception("Attach a turret base!");
         
-        // Set indicator size according to range
-        gameObject.transform.localScale = new Vector3(turretBase.range * 2, turretBase.range * 2, 0);
+            // Set indicator size according to range
+            gameObject.transform.localScale = new Vector3(turretBase.range * 2, turretBase.range * 2, 0);
+
+            turretBase.OnTurretSelected += ChangeVisiblity;
+        }
+
+        private void OnEnable()
+        {
+
+        }
+
+        private void ChangeVisiblity(bool selected)
+        {
+            gameObject.SetActive(selected);
+        }
     }
 }
