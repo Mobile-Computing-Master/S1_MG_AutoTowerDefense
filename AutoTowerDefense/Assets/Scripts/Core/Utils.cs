@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core
@@ -18,6 +19,14 @@ namespace Core
         public static bool IsInsideRect(Vector3 position, Rect rectangle)
         {
             return false;
+        }
+
+        public static Vector3 SnapToGrid(Vector3 vector)
+        {
+            vector.x = (float) Math.Round(vector.x * 2, MidpointRounding.AwayFromZero) / 2;
+            vector.y = (float) Math.Round(vector.y * 2, MidpointRounding.AwayFromZero) / 2;
+
+            return vector;
         }
     }
 }

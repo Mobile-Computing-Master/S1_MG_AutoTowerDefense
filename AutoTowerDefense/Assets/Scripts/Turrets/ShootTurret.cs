@@ -21,6 +21,8 @@ namespace Turrets
         
         public void Update()
         {
+            if (!active) return;
+
             _reloadTime += Time.deltaTime;
 
             if (_inRange.Count > 0 && _reloadTime >= 1 / hitsPerSecond)

@@ -1,5 +1,6 @@
 using System;
 using Core.GameManager;
+using Core.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -11,7 +12,10 @@ namespace Core.Controls
     public class InputManager : MonoBehaviour
     {
         [Inject]
-        private ILocalGameManager _localGameManager; 
+        private ILocalGameManager _localGameManager;
+
+        [Inject]
+        private IUiController _uiController;
         
         public float leftBorder;
         public float rightBorder;
@@ -65,13 +69,15 @@ namespace Core.Controls
             var newPosition = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
             newPosition.z = gameObject.transform.position.z;
 
-            gameObject.transform.position = newPosition;
+            gameObject.transform.position = Utils.SnapToGrid(newPosition);
         }
 
         private void MoveCamera(Touch touch)
         {
             if (touch.phase == TouchPhase.Began)
             {
+                ResetElementsForCameraMove();
+
                 _startDrag = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
                 _isDragging = true;
             }
@@ -98,6 +104,13 @@ namespace Core.Controls
             return vector;
         }
 
+        // Register any methods used for cleaning up stuff, when camera is moved
+        private void ResetElementsForCameraMove()
+        {
+            _uiController.CloseTurretConfirmPopover();
+            _localGameManager.CancelBuyPreview();
+        }
+        
         // postpone for now
         private void ZoomCamera(Touch touch1, Touch touch2)
         {

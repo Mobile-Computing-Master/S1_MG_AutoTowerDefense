@@ -13,6 +13,9 @@ namespace Core.GameManager
         public void StartUiElementDrag(GameObject gameObject);
         
         public void CancelUiElementDrag();
-        
+
+        void SetElementForBuyPreview(GameObject gameObject);
+        void BuyPreviewedElement();
+        void CancelBuyPreview();
     }
 }

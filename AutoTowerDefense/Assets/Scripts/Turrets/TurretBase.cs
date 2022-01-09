@@ -1,5 +1,6 @@
 using System;
 using Core.GameManager;
+using Core.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
@@ -7,9 +8,10 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Turrets
 {
-    public abstract class TurretBase : MonoBehaviour
+    public abstract class TurretBase : MonoBehaviour, IBuyable
     {
         public float range = 4f;
+        public bool active = false;
 
         public delegate void SelectTurret(bool selected);
         public event SelectTurret OnTurretSelected;
@@ -72,6 +74,14 @@ namespace Turrets
                     IsSelected = false;
                 }   
             }
+        }
+
+        public int Buy()
+        {
+            active = true;
+            
+            // TODO: Return price?
+            return 0;
         }
     }
 }

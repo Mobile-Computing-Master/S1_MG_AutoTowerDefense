@@ -1,3 +1,4 @@
+using System;
 using Core.GameManager;
 using Turrets;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Core.UI
 
         [Inject]
         private ILocalGameManager _localGameManager;
-        
+
         public void ToggleSideDrawer()
         {
             _uiController.ToggleMainSideDrawer();
@@ -21,17 +22,33 @@ namespace Core.UI
 
         public void InitiateDragBuy(GameObject gameObject)
         {
+            // Clear existing buys
+            DeclineDragBuy();
+            
             var spawnPosition = Camera.main.ScreenToWorldPoint(Touch.activeFingers[0].screenPosition);
             spawnPosition.z = 0;
             var spawnedGameObject = Instantiate(gameObject, spawnPosition, Quaternion.identity);
             
             _localGameManager.StartUiElementDrag(spawnedGameObject);
+            _localGameManager.SetElementForBuyPreview(spawnedGameObject);
         }
         
         public void EndDragBuy()
         {
+            _uiController.OpenTurretConfirmPopover(_localGameManager.DraggedElement.transform.position);
             _localGameManager.CancelUiElementDrag();
+        }
 
+        public void ConfirmDragBuy()
+        {
+            _localGameManager.BuyPreviewedElement();
+            _uiController.CloseTurretConfirmPopover();
+        }
+
+        public void DeclineDragBuy()
+        {
+            _localGameManager.CancelBuyPreview();
+            _uiController.CloseTurretConfirmPopover();
         }
     }
 }
