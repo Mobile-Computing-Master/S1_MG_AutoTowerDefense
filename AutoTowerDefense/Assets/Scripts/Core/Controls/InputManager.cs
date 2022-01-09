@@ -1,12 +1,18 @@
 using System;
+using Core.GameManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Zenject;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 namespace Core.Controls
 {
     public class InputManager : MonoBehaviour
     {
+        [Inject]
+        private ILocalGameManager _localGameManager; 
+        
         public float leftBorder;
         public float rightBorder;
         public float upperBorder;
@@ -16,6 +22,7 @@ namespace Core.Controls
         private Camera _mainCamera;
         private Vector3 _startDrag;
         private float _initialZoomDistance;
+        private bool _isDragging;
 
         private void Awake()
         {
@@ -36,7 +43,9 @@ namespace Core.Controls
 
         private void Update()
         {
-            if (Touch.activeFingers.Count == 1)
+            if (EventSystem.current.IsPointerOverGameObject() && !_isDragging) return;
+
+            if (Touch.activeFingers.Count == 1 && !_localGameManager.UiElementIsDragged())
             {
                 MoveCamera(Touch.activeTouches[0]);
             }
@@ -47,11 +56,21 @@ namespace Core.Controls
             // }
         }
 
+        private void DragGameObject(GameObject go)
+        {
+            // TODO
+        }
+
         private void MoveCamera(Touch touch)
         {
             if (touch.phase == TouchPhase.Began)
             {
                 _startDrag = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
+                _isDragging = true;
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                _isDragging = false;
             }
             
             if (touch.phase == TouchPhase.Moved)

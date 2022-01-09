@@ -1,15 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using Core.GameManager;
 using Turrets;
-using UnityEngine;
 
-public class LocalGameManager : ILocalGameManager
+namespace Core.GameManager
 {
-    private TurretBase _selectedTurret = null;
-    
-    public void SetSelectedTurret(TurretBase turret)
+    public class LocalGameManager : ILocalGameManager
     {
-        _selectedTurret = turret;
+        private TurretBase _selectedTurret = null;
+        private bool _uiElementIsDragged = false;
+    
+        public void SetSelectedTurret(TurretBase turret)
+        {
+            _selectedTurret = turret;
+        }
+
+        public void StartUiElementDrag()
+        {
+            _uiElementIsDragged = true;
+        }
+
+        public void EndUiElementDrag()
+        {
+            _uiElementIsDragged = false;
+        }
+
+        public bool UiElementIsDragged()
+        {
+            return _uiElementIsDragged;
+        }
     }
 }
