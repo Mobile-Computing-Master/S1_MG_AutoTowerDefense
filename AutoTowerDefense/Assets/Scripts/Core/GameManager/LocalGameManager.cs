@@ -1,4 +1,5 @@
 using Turrets;
+using UnityEngine;
 
 namespace Core.GameManager
 {
@@ -6,25 +7,32 @@ namespace Core.GameManager
     {
         private TurretBase _selectedTurret = null;
         private bool _uiElementIsDragged = false;
+        private GameObject _dragAttachedElement = null;
     
         public void SetSelectedTurret(TurretBase turret)
         {
             _selectedTurret = turret;
         }
 
-        public void StartUiElementDrag()
+        public bool UiElementIsDragged => _uiElementIsDragged;
+
+        public GameObject DraggedElement => _dragAttachedElement;
+
+        public void StartUiElementDrag(GameObject gameObject)
         {
+            _dragAttachedElement = gameObject;
             _uiElementIsDragged = true;
         }
 
-        public void EndUiElementDrag()
+        public void CancelUiElementDrag()
         {
+            _dragAttachedElement = null;
             _uiElementIsDragged = false;
         }
 
-        public bool UiElementIsDragged()
+        public GameObject GetDraggedElement()
         {
-            return _uiElementIsDragged;
+            return _dragAttachedElement;
         }
     }
 }

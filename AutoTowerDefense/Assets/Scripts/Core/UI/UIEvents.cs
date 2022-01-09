@@ -2,6 +2,7 @@ using Core.GameManager;
 using Turrets;
 using UnityEngine;
 using Zenject;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Core.UI
 {
@@ -20,14 +21,16 @@ namespace Core.UI
 
         public void InitiateDragBuy(GameObject gameObject)
         {
-            _localGameManager.StartUiElementDrag();
-            Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity);
-
+            var spawnPosition = Camera.main.ScreenToWorldPoint(Touch.activeFingers[0].screenPosition);
+            spawnPosition.z = 0;
+            var spawnedGameObject = Instantiate(gameObject, spawnPosition, Quaternion.identity);
+            
+            _localGameManager.StartUiElementDrag(spawnedGameObject);
         }
         
         public void EndDragBuy()
         {
-            _localGameManager.EndUiElementDrag();
+            _localGameManager.CancelUiElementDrag();
 
         }
     }

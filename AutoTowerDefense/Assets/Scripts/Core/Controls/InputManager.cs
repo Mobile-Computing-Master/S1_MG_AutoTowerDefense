@@ -43,11 +43,15 @@ namespace Core.Controls
 
         private void Update()
         {
-            if (EventSystem.current.IsPointerOverGameObject() && !_isDragging) return;
+            if (EventSystem.current.IsPointerOverGameObject() && !_isDragging && !_localGameManager.UiElementIsDragged) return;
 
-            if (Touch.activeFingers.Count == 1 && !_localGameManager.UiElementIsDragged())
+            if (Touch.activeFingers.Count == 1 && !_localGameManager.UiElementIsDragged)
             {
                 MoveCamera(Touch.activeTouches[0]);
+            }
+            else if (_localGameManager.UiElementIsDragged)
+            {
+                DragGameObject(Touch.activeTouches[0], _localGameManager.DraggedElement);
             }
 
             // if (Touch.activeFingers.Count == 2)
@@ -56,9 +60,12 @@ namespace Core.Controls
             // }
         }
 
-        private void DragGameObject(GameObject go)
+        private void DragGameObject(Touch touch, GameObject gameObject)
         {
-            // TODO
+            var newPosition = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
+            newPosition.z = gameObject.transform.position.z;
+
+            gameObject.transform.position = newPosition;
         }
 
         private void MoveCamera(Touch touch)

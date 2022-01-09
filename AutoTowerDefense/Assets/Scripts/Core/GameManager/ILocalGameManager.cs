@@ -1,13 +1,18 @@
 ﻿using Turrets;
+using UnityEngine;
 
 namespace Core.GameManager
 {
     public interface ILocalGameManager
     {
+        public bool UiElementIsDragged { get; }
+        public GameObject DraggedElement { get; }
+        
         public void SetSelectedTurret(TurretBase turret);
-        public void StartUiElementDrag();
-        public void EndUiElementDrag();
 
-        public bool UiElementIsDragged();
+        public void StartUiElementDrag(GameObject gameObject);
+        
+        public void CancelUiElementDrag();
+        
     }
 }
