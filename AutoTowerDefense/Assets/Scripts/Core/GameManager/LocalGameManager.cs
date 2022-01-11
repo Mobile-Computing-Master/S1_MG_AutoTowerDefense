@@ -40,6 +40,10 @@ namespace Core.GameManager
         public void SetElementForBuyPreview(GameObject gameObject)
         {
             _buyPreviewElement = gameObject;
+
+            var buyableElement = _buyPreviewElement.GetComponent<IBuyable>();
+            
+            buyableElement.StartBuyPreview();
         }
 
         public void BuyPreviewedElement()
@@ -51,6 +55,12 @@ namespace Core.GameManager
 
         public void CancelBuyPreview()
         {
+            if (!_buyPreviewElement) return;
+            
+            var buyableElement = _buyPreviewElement.GetComponent<IBuyable>();
+            
+            buyableElement.EndBuyPreview();
+            
             GameObject.Destroy(_buyPreviewElement);
             _buyPreviewElement = null;
         }

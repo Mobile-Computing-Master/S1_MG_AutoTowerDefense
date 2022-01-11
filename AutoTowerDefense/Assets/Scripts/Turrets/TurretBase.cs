@@ -83,5 +83,18 @@ namespace Turrets
             // TODO: Return price?
             return 0;
         }
+
+        public void StartBuyPreview()
+        {
+            Debug.Log("Start prev");
+            IsSelected = true;
+        }
+
+        public void EndBuyPreview()
+        {
+            Debug.Log("End prev");
+
+            IsSelected = false;
+        }
     }
 }

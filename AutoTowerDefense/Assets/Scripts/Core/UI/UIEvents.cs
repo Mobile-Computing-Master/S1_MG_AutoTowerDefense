@@ -42,6 +42,7 @@ namespace Core.UI
         public void ConfirmDragBuy()
         {
             _localGameManager.BuyPreviewedElement();
+            _localGameManager.CancelBuyPreview();
             _uiController.CloseTurretConfirmPopover();
         }
 
