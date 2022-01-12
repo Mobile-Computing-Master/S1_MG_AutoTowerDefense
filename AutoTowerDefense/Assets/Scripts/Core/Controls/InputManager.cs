@@ -42,7 +42,7 @@ namespace Core.Controls
             var topRightVpPosition = _mainCamera.ScreenToWorldPoint(new Vector3(_trueViewPort.width, _trueViewPort.height, 0));
 
             _innerRect = new Rect(Vector2.zero,
-                new Vector2(Map.Map.width - topRightVpPosition.x * 2, Map.Map.height - topRightVpPosition.y * 2));
+                new Vector2(Map.MapConstants.width - topRightVpPosition.x * 2, Map.MapConstants.height - topRightVpPosition.y * 2));
         }
 
         private void Update()

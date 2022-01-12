@@ -61,7 +61,7 @@ namespace Core.GameManager
             
             buyableElement.EndBuyPreview();
             
-            GameObject.Destroy(_buyPreviewElement);
+            Object.Destroy(_buyPreviewElement);
             _buyPreviewElement = null;
         }
     }

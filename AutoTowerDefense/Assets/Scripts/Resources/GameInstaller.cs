@@ -1,9 +1,9 @@
 using Core.GameManager;
+using Core.Map;
 using Core.UI;
-using UnityEngine;
 using Zenject;
 
-namespace Core.Resources
+namespace Resources
 {
     public class GameInstaller : MonoInstaller<GameInstaller>
     {
@@ -11,6 +11,7 @@ namespace Core.Resources
         {
             Container.Bind<ILocalGameManager>().To<LocalGameManager>().AsSingle();
             Container.Bind<IUiController>().To<UiController>().AsSingle();
+            Container.Bind<IMapManager>().To<MapManager>().AsSingle();
         }
     }
 }
