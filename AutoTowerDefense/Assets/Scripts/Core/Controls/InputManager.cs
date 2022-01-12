@@ -12,11 +12,8 @@ namespace Core.Controls
 {
     public class InputManager : MonoBehaviour
     {
-        [Inject]
-        private ILocalGameManager _localGameManager;
-
-        [Inject]
-        private IUiController _uiController;
+        private LocalGameManager _localGameManager;
+        private UiController _uiController;
         
         public float leftBorder;
         public float rightBorder;
@@ -37,6 +34,8 @@ namespace Core.Controls
 
         private void Start()
         {
+            Initiate();
+            
             // Get a rectangle, that represents the bounds of the camera
             _trueViewPort = _mainCamera.pixelRect;
             
@@ -136,6 +135,13 @@ namespace Core.Controls
 
                 _mainCamera.fieldOfView += touchDistance * 0.1f;
             }
+        }
+        
+        private void Initiate()
+        {
+            var sceneContext = GameObject.Find("Context");
+            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _uiController = sceneContext.GetComponent<UiController>();
         }
     }
 }

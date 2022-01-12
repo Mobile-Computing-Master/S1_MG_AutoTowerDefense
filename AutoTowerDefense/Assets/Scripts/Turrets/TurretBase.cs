@@ -17,11 +17,8 @@ namespace Turrets
         public delegate void SelectTurret(bool selected);
         public event SelectTurret OnTurretSelected;
 
-        [Inject]
-        private ILocalGameManager _localGameManager;
-
-        [Inject]
-        private IMapManager _mapManager;
+        private LocalGameManager _localGameManager;
+        private MapManager _mapManager;
         
         private bool _isSelected;
         private Collider2D _bodyCollider = null;
@@ -43,6 +40,8 @@ namespace Turrets
         
         private void Start()
         {
+            Initiate();
+            
             var collider = gameObject.GetComponent<CircleCollider2D>();
 
             if (!collider) throw new Exception("Attach a 2d circle collider!");
@@ -54,7 +53,14 @@ namespace Turrets
 
             if (!_bodyCollider) throw new Exception("Attach a body with a 2D collider");
         }
-        
+
+        private void Initiate()
+        {
+            var sceneContext = GameObject.Find("Context");
+            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _mapManager = sceneContext.GetComponent<MapManager>();
+        }
+
         private void DetectClick(Finger finger)
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);

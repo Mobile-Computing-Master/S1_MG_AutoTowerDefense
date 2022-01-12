@@ -13,12 +13,18 @@ namespace Path
         public List<Vector3> points = new List<Vector3>();
         public float pathWidth = 1.0f;
         
-        [Inject]
-        private IMapManager _mapManager;
+        private MapManager _mapManager;
 
         private void Start()
         {
+            Initiate();
             _mapManager.InitiateProtectedSpace();
+        }
+        
+        private void Initiate()
+        {
+            var sceneContext = GameObject.Find("Context");
+            _mapManager = sceneContext.GetComponent<MapManager>();
         }
     }
     

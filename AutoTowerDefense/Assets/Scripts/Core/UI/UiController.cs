@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core.UI
 {
-    public class UiController : IUiController
+    public class UiController : MonoBehaviour
     {
         private GameObject _mainSideDrawer = null;
         private Animation _mainSideDrawerAnimator = null;

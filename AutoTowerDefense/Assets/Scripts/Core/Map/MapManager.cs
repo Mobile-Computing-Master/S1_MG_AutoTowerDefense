@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.Map
 {
-    public class MapManager : IMapManager
+    public class MapManager : MonoBehaviour
     {
         private readonly List<Tuple<Vector3, Vector3>> _protectedSpaceLines = new List<Tuple<Vector3, Vector3>>();
         private float _pathWidth;

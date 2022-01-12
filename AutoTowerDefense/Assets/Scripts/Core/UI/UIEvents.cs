@@ -9,11 +9,13 @@ namespace Core.UI
 {
     public class UIEvents : MonoBehaviour
     {
-        [Inject]
-        private IUiController _uiController;
+        private UiController _uiController;
+        private LocalGameManager _localGameManager;
 
-        [Inject]
-        private ILocalGameManager _localGameManager;
+        private void Start()
+        {
+            Initiate();
+        }
 
         public void ToggleSideDrawer()
         {
@@ -50,6 +52,13 @@ namespace Core.UI
         {
             _localGameManager.CancelBuyPreview();
             _uiController.CloseTurretConfirmPopover();
+        }
+        
+        private void Initiate()
+        {
+            var sceneContext = GameObject.Find("Context");
+            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _uiController = sceneContext.GetComponent<UiController>();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.GameManager
 {
-    public class LocalGameManager : ILocalGameManager
+    public class LocalGameManager : MonoBehaviour
     {
         private TurretBase _selectedTurret = null;
         private bool _uiElementIsDragged = false;
@@ -20,9 +20,9 @@ namespace Core.GameManager
 
         public GameObject DraggedElement => _dragAttachedElement;
 
-        public void StartUiElementDrag(GameObject gameObject)
+        public void StartUiElementDrag(GameObject go)
         {
-            _dragAttachedElement = gameObject;
+            _dragAttachedElement = go;
             _uiElementIsDragged = true;
         }
 
@@ -37,9 +37,9 @@ namespace Core.GameManager
             return _dragAttachedElement;
         }
         
-        public void SetElementForBuyPreview(GameObject gameObject)
+        public void SetElementForBuyPreview(GameObject go)
         {
-            _buyPreviewElement = gameObject;
+            _buyPreviewElement = go;
 
             var buyableElement = _buyPreviewElement.GetComponent<IBuyable>();
             
