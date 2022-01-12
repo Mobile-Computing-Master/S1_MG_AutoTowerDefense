@@ -4,7 +4,6 @@ using Core.Interfaces;
 using Core.Map;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Turrets
@@ -16,6 +15,10 @@ namespace Turrets
 
         public delegate void SelectTurret(bool selected);
         public event SelectTurret OnTurretSelected;
+
+        public delegate void ChangeRangeIndicatorColor(bool canPlace);
+
+        public event ChangeRangeIndicatorColor OnChangeRangeIndicatorColor;
 
         private LocalGameManager _localGameManager;
         private MapManager _mapManager;
@@ -107,15 +110,14 @@ namespace Turrets
 
         public void UpdatePreview(Vector3 position)
         {
-            Debug.Log(_mapManager.IsInProtectedSpace(position));
+            if (_mapManager.IsInProtectedSpace(position))
+            {
+                // TODO: red
+            }
+            else
+            {
+                // TODO: green 
+            }
         }
-        
-        // public class TurretBaseFactory : IFactory<TurretBase>
-        // {
-        //     public TurretBase Create()
-        //     {
-        //         return new ShootTurret();
-        //     }
-        // }
     }
 }

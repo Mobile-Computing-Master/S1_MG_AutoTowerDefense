@@ -34,8 +34,7 @@ namespace Core.Map
             foreach (var line in _protectedSpaceLines)
             {
                 var distance = DistanceToLine(line.Item1, line.Item2, vector);
-
-                if (distance.x <= _pathWidth || distance.y <= _pathWidth)
+                if (distance <= _pathWidth)
                 {
                     isInProtectedSpace = true;
                     break;
@@ -45,16 +44,23 @@ namespace Core.Map
             return isInProtectedSpace;
         }
         
-        private static Vector3 DistanceToLine(Vector3 start, Vector3 end, Vector3 pnt)
+        private static float DistanceToLine(Vector3 start, Vector3 end, Vector3 pnt)
         {
-            var line = (end - start);
-            var len = line.magnitude;
-            line.Normalize();
-   
-            var v = pnt - start;
-            var d = Vector3.Dot(v, line);
-            d = Mathf.Clamp(d, 0f, len);
-            return start + line * d;
+            var ax = start.x;
+            var ay = start.y;
+            var bx = end.x;
+            var by = end.y;
+            var x = pnt.x;
+            var y = pnt.y;
+            
+            if ((ax-bx)*(x-bx)+(ay-by)*(y-by) <= 0)
+                return (float)Math.Sqrt((x - bx) * (x - bx) + (y - by) * (y - by));
+
+            if ((bx-ax)*(x-ax)+(by-ay)*(y-ay) <= 0)
+                return (float)Math.Sqrt((x - ax) * (x - ax) + (y - ay) * (y - ay));
+
+            return (float)(Math.Abs((by - ay)*x - (bx - ax)*y + bx*ay - by*ax) /
+                   Math.Sqrt((ay - by) * (ay - by) + (ax - bx) * (ax - bx)));
         }
     }
 }
