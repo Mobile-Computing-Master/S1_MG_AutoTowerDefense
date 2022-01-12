@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Core.Eums;
-using Mobs;
+﻿using Mobs;
 using UnityEngine;
 
 namespace Projectiles
 {
-    public class ProjectileBase : MonoBehaviour
+    public abstract class ProjectileBase : MonoBehaviour
     {
         public float speed = 100f;
         public float damage = 50f;

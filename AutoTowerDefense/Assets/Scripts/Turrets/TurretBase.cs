@@ -18,6 +18,7 @@ namespace Turrets
 
         public delegate void ChangeRangeIndicatorColor(bool canPlace);
 
+        // TODO: Continue
         public event ChangeRangeIndicatorColor OnChangeRangeIndicatorColor;
 
         private LocalGameManager _localGameManager;
