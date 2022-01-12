@@ -1,6 +1,7 @@
 using System;
 using Core.GameManager;
 using Core.Interfaces;
+using Core.Map;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
@@ -18,15 +19,16 @@ namespace Turrets
 
         [Inject]
         private ILocalGameManager _localGameManager;
+
+        [Inject]
+        private IMapManager _mapManager;
+        
         private bool _isSelected;
         private Collider2D _bodyCollider = null;
 
         private bool IsSelected
         {
-            get
-            {
-                return _isSelected;
-            }
+            get => _isSelected;
             set
             {
                 if (value != _isSelected)
@@ -96,5 +98,18 @@ namespace Turrets
 
             IsSelected = false;
         }
+
+        public void UpdatePreview(Vector3 position)
+        {
+            Debug.Log(_mapManager.IsInProtectedSpace(position));
+        }
+        
+        // public class TurretBaseFactory : IFactory<TurretBase>
+        // {
+        //     public TurretBase Create()
+        //     {
+        //         return new ShootTurret();
+        //     }
+        // }
     }
 }

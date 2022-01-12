@@ -8,7 +8,7 @@ namespace Core.Map
 {
     public class MapManager : IMapManager
     {
-        private List<Tuple<Vector3, Vector3>> _protectedSpaceLines = new List<Tuple<Vector3, Vector3>>();
+        private readonly List<Tuple<Vector3, Vector3>> _protectedSpaceLines = new List<Tuple<Vector3, Vector3>>();
         private float _pathWidth;
         
         public void InitiateProtectedSpace()
@@ -25,8 +25,6 @@ namespace Core.Map
             }
             
             _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.points.Last(), pathMap.player2Base));
-
-            _protectedSpaceLines.ForEach(l => Debug.Log($"start: {l.Item1} end: {l.Item2}"));
         }
 
         public bool IsInProtectedSpace(Vector3 vector)

@@ -1,5 +1,6 @@
 using System;
 using Core.GameManager;
+using Core.Interfaces;
 using Core.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -64,12 +65,16 @@ namespace Core.Controls
             // }
         }
 
-        private void DragGameObject(Touch touch, GameObject gameObject)
+        private void DragGameObject(Touch touch, GameObject go)
         {
             var newPosition = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
-            newPosition.z = gameObject.transform.position.z;
+            newPosition.z = go.transform.position.z;
 
-            gameObject.transform.position = Utils.SnapToGrid(newPosition);
+            go.transform.position = Utils.SnapToGrid(newPosition);
+
+            var buyableElement = go.GetComponent<IBuyable>();
+
+            buyableElement?.UpdatePreview(newPosition);
         }
 
         private void MoveCamera(Touch touch)

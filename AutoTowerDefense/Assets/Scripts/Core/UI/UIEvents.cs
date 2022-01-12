@@ -20,14 +20,14 @@ namespace Core.UI
             _uiController.ToggleMainSideDrawer();
         }
 
-        public void InitiateDragBuy(GameObject gameObject)
+        public void InitiateDragBuy(GameObject go)
         {
             // Clear existing buys
             DeclineDragBuy();
             
             var spawnPosition = Camera.main.ScreenToWorldPoint(Touch.activeFingers[0].screenPosition);
             spawnPosition.z = 0;
-            var spawnedGameObject = Instantiate(gameObject, spawnPosition, Quaternion.identity);
+            var spawnedGameObject = Instantiate(go, spawnPosition, Quaternion.identity);
             
             _localGameManager.StartUiElementDrag(spawnedGameObject);
             _localGameManager.SetElementForBuyPreview(spawnedGameObject);
