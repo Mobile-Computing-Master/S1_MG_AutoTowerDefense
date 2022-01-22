@@ -18,7 +18,7 @@ namespace Mobs
 
             if (_creepCooldown >= 1 / creepsPerSecond)
             {
-                var t = Instantiate(creepPrefab, pathMap.player1Base, Quaternion.identity);
+                var t = Instantiate(creepPrefab, pathMap.creepSpawnPoint, Quaternion.identity);
                 t.GetComponent<Creep>().Path = pathMap;
                 _creepCooldown = 0;
             }

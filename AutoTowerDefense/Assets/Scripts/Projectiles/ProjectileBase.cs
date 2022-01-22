@@ -12,6 +12,7 @@ namespace Projectiles
 
         private void Start()
         {
+            if (target == null) return;
             _normalizedDirection = (target.transform.position - transform.position).normalized;
             GetComponent<Rigidbody2D>().AddForce(_normalizedDirection * speed);
         }

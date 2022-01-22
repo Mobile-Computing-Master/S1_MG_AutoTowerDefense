@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Mobs;
+using Path;
 using Projectiles;
 using UnityEngine;
 
 namespace Turrets
 {
-    public class ShootTurret : TurretBase
+    public class SniperTurret : TurretBase
     {
-        public float hitsPerSecond = 2;
-        public GameObject projectilePrefab;
+        public float hitsPerSecond = 1000;
+        public float damage = 1000;
         private readonly HashSet<GameObject> _inRange = new HashSet<GameObject>();
         private float _reloadTime = 0f;
 
@@ -27,7 +26,7 @@ namespace Turrets
 
             if (_inRange.Count > 0 && _reloadTime >= 1 / hitsPerSecond)
             {
-                Shoot(_inRange.First());
+                Shoot(GetFurthestCreep());
                 _reloadTime = 0;
             }
         }
@@ -50,9 +49,26 @@ namespace Turrets
         
         private void Shoot(GameObject target)
         {
-            var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<ProjectileBase>();
-            projectile.target = target;
+            target.GetComponent<Creep>().hp -= damage;
+        }
+        
+        private GameObject GetFurthestCreep ()
+        {
+            GameObject closestCreep = null;
+            var closestDistanceSqr = Mathf.Infinity;
+            var playerBasePoint = GameObject.Find("Path").GetComponent<PathMap>().playerBasePoint;
+
+            foreach(var potentialTarget in _inRange)
+            {
+                var directionToTarget = potentialTarget.transform.position - playerBasePoint;
+                var dSqrToTarget = directionToTarget.sqrMagnitude;
+                
+                if (!(dSqrToTarget < closestDistanceSqr)) continue;
+                closestDistanceSqr = dSqrToTarget;
+                closestCreep = potentialTarget;
+            }
+     
+            return closestCreep;
         }
     }
 }

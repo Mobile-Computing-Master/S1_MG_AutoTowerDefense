@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Mobs;
-using Projectiles;
 using UnityEngine;
 
 namespace Turrets
 {
-    public class FreezeTurret : TurretBase
+    public class HazardTurret : TurretBase
     {
         public float hitsPerSecond = 1000;
-        public GameObject projectilePrefab;
+        public float damage = 5;
         private readonly HashSet<GameObject> _inRange = new HashSet<GameObject>();
         private float _reloadTime = 0f;
 
@@ -26,7 +24,10 @@ namespace Turrets
 
             if (_inRange.Count > 0 && _reloadTime >= 1 / hitsPerSecond)
             {
-                Shoot(_inRange.Last());
+                foreach (var enemy in _inRange)
+                {
+                    Shoot(enemy);
+                }
                 _reloadTime = 0;
             }
         }
@@ -49,9 +50,7 @@ namespace Turrets
         
         private void Shoot(GameObject target)
         {
-            var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<FreezeProjectile>();
-            projectile.target = target;
+            target.GetComponent<Creep>().hp -= damage;
         }
     }
 }

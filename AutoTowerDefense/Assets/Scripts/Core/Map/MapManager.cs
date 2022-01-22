@@ -17,14 +17,14 @@ namespace Core.Map
             _pathWidth = pathMap.pathWidth;
             
             // Create a list with lines, that indicate the path
-            _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.player1Base, pathMap.points[0]));
+            _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.creepSpawnPoint, pathMap.points[0]));
 
             for (int i = 0; i < pathMap.points.Count - 1; i++)
             {
                 _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.points[i], pathMap.points[i + 1]));
             }
             
-            _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.points.Last(), pathMap.player2Base));
+            _protectedSpaceLines.Add(new Tuple<Vector3, Vector3>(pathMap.points.Last(), pathMap.playerBasePoint));
         }
 
         public bool IsInProtectedSpace(Vector3 vector)

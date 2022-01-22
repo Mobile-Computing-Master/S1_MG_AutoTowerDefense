@@ -16,7 +16,7 @@ namespace Mobs
 
         private void Update()
         {
-            var nextPoint = _currentPointIndex < Path.points.Count ? Path.points[_currentPointIndex] : Path.player2Base;
+            var nextPoint = _currentPointIndex < Path.points.Count ? Path.points[_currentPointIndex] : Path.playerBasePoint;
             var currentPosition = transform.position;
 
             if (transform.position != nextPoint)

@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 0.19992878, g: 0.23764515, b: 0.9056604, a: 1}
+  m_Color: {r: 0.08130119, g: 0.5943396, b: 0.23548228, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -110,9 +110,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2028769192921499964}
   - component: {fileID: -2190703004252439137}
-  - component: {fileID: -8734250183513198748}
+  - component: {fileID: 3392772209227689040}
   m_Layer: 0
-  m_Name: TurretDummy
+  m_Name: HazardTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &-8734250183513198748
+--- !u!114 &3392772209227689040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,14 +159,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4096835905171625614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d8c8a52b892c948acab4aefbc33ed1, type: 3}
+  m_Script: {fileID: 11500000, guid: 65814cbac5e74129a99b3c2545bd4a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4
+  range: 3
   active: 0
-  hitsPerSecond: 2
-  projectilePrefab: {fileID: 3796866511622362557, guid: 26a3ed66db244204b980a1942917ed60,
-    type: 3}
+  hitsPerSecond: 5
+  damage: 5
 --- !u!1 &4209312420009830893
 GameObject:
   m_ObjectHideFlags: 0
