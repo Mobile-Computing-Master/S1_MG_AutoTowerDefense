@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Turrets
 {
-    public class FreezeTurret : TurretBase
+    public class MoabTurret : TurretBase
     {
         public float hitsPerSecond = 1000;
         public GameObject projectilePrefab;
@@ -26,7 +26,7 @@ namespace Turrets
 
             if (_inRange.Count > 0 && _reloadTime >= 1 / hitsPerSecond)
             {
-                Shoot(_inRange.Last());
+                Shoot(GetClosestCreep());
                 _reloadTime = 0;
             }
         }
@@ -50,8 +50,27 @@ namespace Turrets
         private void Shoot(GameObject target)
         {
             var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<MoabProjectile>();
+                .GetComponent<FreezeProjectile>();
             projectile.target = target;
+        }
+        
+        private GameObject GetClosestCreep ()
+        {
+            GameObject closestCreep = null;
+            var closestDistanceSqr = Mathf.Infinity;
+            var currentPosition = transform.position;
+            
+            foreach(var potentialTarget in _inRange)
+            {
+                var directionToTarget = potentialTarget.transform.position - currentPosition;
+                var dSqrToTarget = directionToTarget.sqrMagnitude;
+                
+                if (!(dSqrToTarget < closestDistanceSqr)) continue;
+                closestDistanceSqr = dSqrToTarget;
+                closestCreep = potentialTarget;
+            }
+     
+            return closestCreep;
         }
     }
 }
