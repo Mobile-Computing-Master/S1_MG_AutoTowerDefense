@@ -95,7 +95,7 @@ namespace Core.UI
             _turretConfirmPopoverGameObject = GameObject.Find("TurretConfirmPopover");
             _turretConfirmPopoverRect = _turretConfirmPopoverGameObject.GetComponent<Canvas>().GetComponent<RectTransform>();
             
-            _trash = GameObject.Find("DrawerFooterTrash");
+            _trash = GameObject.Find("Trash");
             _trashRect = _trash.GetComponent<RectTransform>();
 
         }
