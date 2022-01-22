@@ -1,7 +1,10 @@
 using System;
 using Core.GameManager;
+using Core.Interfaces;
 using Turrets;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
@@ -15,6 +18,7 @@ namespace Core.UI
         private void Start()
         {
             Initiate();
+            TouchSimulation.Enable();
         }
 
         public void ToggleSideDrawer()
@@ -24,21 +28,33 @@ namespace Core.UI
 
         public void InitiateDragBuy(GameObject go)
         {
-            // Clear existing buys
-            DeclineDragBuy();
-            
+            _uiController.CloseMainSideDrawer();
             var spawnPosition = Camera.main.ScreenToWorldPoint(Touch.activeFingers[0].screenPosition);
             spawnPosition.z = 0;
             var spawnedGameObject = Instantiate(go, spawnPosition, Quaternion.identity);
-            
+
+            _uiController.ShowTrash();
             _localGameManager.StartUiElementDrag(spawnedGameObject);
             _localGameManager.SetElementForBuyPreview(spawnedGameObject);
         }
         
         public void EndDragBuy()
         {
+            var placeableElement = _localGameManager.DraggedElement.GetComponent<IPlaceable>();
+
             _uiController.OpenTurretConfirmPopover(_localGameManager.DraggedElement.transform.position);
             _localGameManager.CancelUiElementDrag();
+
+            if (EventSystem.current.IsPointerOverGameObject() || !placeableElement.IsPlaceable)
+            {
+                // Element is not placeable at this position, e. g. Turret is placed on top of line
+                // Or Element is dragged over trash
+                DeclineDragBuy();
+            }
+
+            _uiController.HideTrash();
+            _uiController.OpenMainSideDrawer();
+
         }
 
         public void ConfirmDragBuy()

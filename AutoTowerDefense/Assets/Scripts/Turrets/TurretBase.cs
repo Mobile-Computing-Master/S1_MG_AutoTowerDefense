@@ -8,24 +8,18 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Turrets
 {
-    public abstract class TurretBase : MonoBehaviour, IBuyable
+    public abstract class TurretBase : MonoBehaviour, IBuyable, IPlaceable
     {
         public float range = 4f;
         public bool active = false;
+        private LocalGameManager _localGameManager;
+        private MapManager _mapManager;
+        private Collider2D _bodyCollider = null;
 
         public delegate void SelectTurret(bool selected);
         public event SelectTurret OnTurretSelected;
-
-        public delegate void ChangeRangeIndicatorColor(bool canPlace);
-
-        // TODO: Continue
-        public event ChangeRangeIndicatorColor OnChangeRangeIndicatorColor;
-
-        private LocalGameManager _localGameManager;
-        private MapManager _mapManager;
         
         private bool _isSelected;
-        private Collider2D _bodyCollider = null;
 
         private bool IsSelected
         {
@@ -40,9 +34,25 @@ namespace Turrets
             }
         }
 
+        public delegate void CanPlaceTurret(bool canPlace);
+        public event CanPlaceTurret OnCanPlaceTurretChanged;
+        private bool _isPlaceable = false;
+        public bool IsPlaceable
+        {
+            get => _isPlaceable;
+            set
+            {
+                if (value != _isPlaceable)
+                {
+                    OnCanPlaceTurretChanged?.Invoke(value);
+                    _isPlaceable = value;
+                }
+            }
+        }
+
         public abstract void BuyUpgrade();
         
-        private void Start()
+        private void Awake()
         {
             Initiate();
             
@@ -98,27 +108,17 @@ namespace Turrets
 
         public void StartBuyPreview()
         {
-            Debug.Log("Start prev");
             IsSelected = true;
         }
 
         public void EndBuyPreview()
         {
-            Debug.Log("End prev");
-
             IsSelected = false;
         }
 
         public void UpdatePreview(Vector3 position)
         {
-            if (_mapManager.IsInProtectedSpace(position))
-            {
-                // TODO: red
-            }
-            else
-            {
-                // TODO: green 
-            }
+            IsPlaceable = !_mapManager.IsInProtectedSpace(position);
         }
     }
 }
