@@ -26,14 +26,5 @@ namespace Turrets
             }
             ReloadTime = 0;
         }
-
-        private void Shoot(GameObject target)
-        {
-            if (!active) return;
-
-            var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<ProjectileBase>();
-            projectile.target = target;
-        }
     }
 }

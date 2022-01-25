@@ -26,7 +26,7 @@ namespace Turrets
             ReloadTime = 0;
         }
 
-        private void Shoot(GameObject target)
+        protected override void Shoot(GameObject target)
         {
             target.GetComponent<Creep>().hp -= damage;
         }

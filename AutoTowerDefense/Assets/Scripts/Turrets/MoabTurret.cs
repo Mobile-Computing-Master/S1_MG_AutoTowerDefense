@@ -24,13 +24,6 @@ namespace Turrets
             ReloadTime = 0;
         }
 
-        private void Shoot(GameObject target)
-        {
-            var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<MoabProjectile>();
-            projectile.target = target;
-        }
-        
         private GameObject GetClosestCreep ()
         {
             GameObject closestCreep = null;
