@@ -14,7 +14,7 @@ namespace Turrets
             if (!active) return;
 
             ReloadTime += Time.deltaTime;
-            if (InRange.Count <= 0 || !(ReloadTime >= 1 / hitsPerSecond)) return;
+            if (InRange.Count <= 0 || !(ReloadTime >= 1 / (hitsPerSecond * ReloadMultiplier))) return;
             
             Shoot(InRange.First());
             ReloadTime = 0;

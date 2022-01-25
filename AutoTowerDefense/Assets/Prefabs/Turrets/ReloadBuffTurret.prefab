@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1657556404270968226}
   - component: {fileID: 8344603087429906290}
   - component: {fileID: 7406455945953997425}
-  - component: {fileID: 6357913725401837726}
+  - component: {fileID: 6843097189945693678}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 0.9150943, g: 0.082013145, b: 0.620027, a: 1}
+  m_Color: {r: 0.4888668, g: 0.10234957, b: 0.8679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &6357913725401837726
+--- !u!50 &6843097189945693678
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -132,9 +132,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2028769192921499964}
   - component: {fileID: -2190703004252439137}
-  - component: {fileID: -5212450355663246289}
+  - component: {fileID: -8320629166514288907}
   m_Layer: 0
-  m_Name: DamageBuffTurret
+  m_Name: ReloadBuffTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &-5212450355663246289
+--- !u!114 &-8320629166514288907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4096835905171625614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b88f5784b5447c7bbe9f7d385281a47, type: 3}
+  m_Script: {fileID: 11500000, guid: c7a018a910db486d9f08c7e23b613c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4

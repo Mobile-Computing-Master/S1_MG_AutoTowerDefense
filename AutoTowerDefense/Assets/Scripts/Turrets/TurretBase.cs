@@ -22,6 +22,7 @@ namespace Turrets
         public TurretTier tier = TurretTier.Tier1;
         public virtual TurretType Type { get; protected set; } = TurretType.None;
         public float DamageMultiplier { get; set; } = 1f;
+        public float ReloadMultiplier { get; set; } = 1f;
         
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core.Enums;
 using UnityEngine;
 
@@ -7,11 +6,12 @@ namespace Turrets
 {
     public class DamageBuffTurret : TurretBase
     {
-        public TurretType type = TurretType.DamageBuff;
-        private List<GameObject> _buffed = new List<GameObject>();
-
+        public override TurretType Type { get; protected set; } = TurretType.DamageBuff;
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!active) return;
+
             var turret = other.gameObject.GetComponentInParent<TurretBase>();
             if (turret == null) return;
 
@@ -26,6 +26,8 @@ namespace Turrets
         
         private void OnTriggerExit2D(Collider2D other)
         {
+            if (!active) return;
+            
             var turret = other.gameObject.GetComponentInParent<TurretBase>();
             if (turret == null) return;
 
