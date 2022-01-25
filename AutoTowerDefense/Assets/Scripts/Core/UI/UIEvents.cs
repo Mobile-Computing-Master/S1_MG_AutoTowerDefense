@@ -35,6 +35,7 @@ namespace Core.UI
             
             var go = _turretRoller.GetTurretPrefabBySlot(slot);
             
+            
             _uiController.CloseMainSideDrawer();
             
             if (Camera.main is null) return;
