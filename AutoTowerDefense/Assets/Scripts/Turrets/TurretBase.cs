@@ -21,6 +21,7 @@ namespace Turrets
         public GameObject projectilePrefab;
         public TurretTier tier = TurretTier.Tier1;
         public virtual TurretType Type { get; protected set; } = TurretType.None;
+        public float DamageMultiplier { get; set; } = 1f;
         
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;
@@ -154,9 +155,9 @@ namespace Turrets
 
             projectile.damage = tier switch
             {
-                TurretTier.Tier1 => projectile.damage,
-                TurretTier.Tier2 => projectile.damage * 1.1f,
-                TurretTier.Tier3 => projectile.damage * 1.25f,
+                TurretTier.Tier1 => projectile.damage * DamageMultiplier,
+                TurretTier.Tier2 => projectile.damage * DamageMultiplier * 1.25f,
+                TurretTier.Tier3 => projectile.damage * DamageMultiplier * 1.5f,
                 _ => throw new ArgumentOutOfRangeException()
             };
             
