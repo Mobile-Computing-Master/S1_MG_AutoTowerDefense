@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028769192921499964}
   - component: {fileID: -2190703004252439137}
-  - component: {fileID: 2288117603607643681}
+  - component: {fileID: 8977076969296382124}
   m_Layer: 0
   m_Name: MoabTurret
   m_TagString: Untagged
@@ -150,7 +150,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &2288117603607643681
+--- !u!114 &8977076969296382124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,12 +159,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4096835905171625614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a7717e31ca4496b186a2503893bb3d, type: 3}
+  m_Script: {fileID: 11500000, guid: b850a6abe94c49f987cb75fde1d86c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
+  range: 10
   active: 1
-  hitsPerSecond: 0.1
+  hitsPerSecond: 1000
   projectilePrefab: {fileID: 3796866511622362557, guid: 399db93f0d0d32e49a08055445583d16,
     type: 3}
 --- !u!1 &4209312420009830893

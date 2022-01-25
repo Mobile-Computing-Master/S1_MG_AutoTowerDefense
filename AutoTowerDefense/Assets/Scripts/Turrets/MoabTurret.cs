@@ -50,7 +50,7 @@ namespace Turrets
         private void Shoot(GameObject target)
         {
             var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
-                .GetComponent<FreezeProjectile>();
+                .GetComponent<MoabProjectile>();
             projectile.target = target;
         }
         
