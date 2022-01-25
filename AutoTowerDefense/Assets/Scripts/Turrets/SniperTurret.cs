@@ -1,4 +1,5 @@
-﻿using Mobs;
+﻿using Core.Enums;
+using Mobs;
 using Path;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Turrets
 {
     public class SniperTurret : TurretBase
     {
+        public new TurretType type = TurretType.Sniper;
         public float damage = 1000;
 
         public override void BuyUpgrade()

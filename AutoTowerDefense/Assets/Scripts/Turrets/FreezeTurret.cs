@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Core.Enums;
 using Projectiles;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Turrets
 {
     public class FreezeTurret : TurretBase
     {
+        public new TurretType type = TurretType.Freeze;
+        
         public override void BuyUpgrade()
         {
             throw new System.NotImplementedException();

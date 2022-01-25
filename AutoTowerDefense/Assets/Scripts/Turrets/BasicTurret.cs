@@ -1,11 +1,14 @@
 using System.Linq;
+using Core.Enums;
 using Projectiles;
 using UnityEngine;
 
 namespace Turrets
 {
-    public class BasicTurret : TurretBase 
+    public class BasicTurret : TurretBase
     {
+        public new TurretType type = TurretType.Basic;
+        
         public override void BuyUpgrade()
         {
             throw new System.NotImplementedException();
