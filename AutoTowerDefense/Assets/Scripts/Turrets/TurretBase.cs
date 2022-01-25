@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Core.Enums;
 using Core.Game;
 using Core.Interfaces;
@@ -26,7 +25,6 @@ namespace Turrets
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;
         
-        private BuyService _buyService;
         private MapManager _mapManager;
         private TurretRepository _turretRepository;
         private Collider2D _bodyCollider = null;
@@ -99,7 +97,6 @@ namespace Turrets
         private void Initiate()
         {
             var sceneContext = GameObject.Find("Context");
-            _buyService = sceneContext.GetComponent<BuyService>();
             _mapManager = sceneContext.GetComponent<MapManager>();
             _turretRepository = sceneContext.GetComponent<TurretRepository>();
         }
@@ -132,7 +129,6 @@ namespace Turrets
         {
             active = true;
             
-            // TODO: Return price?
             return 0;
         }
 
@@ -150,7 +146,7 @@ namespace Turrets
         {
             IsPlaceable = !_mapManager.IsInProtectedSpace(position);
         }
-
+        
         protected virtual void Shoot(GameObject target)
         {
             var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)

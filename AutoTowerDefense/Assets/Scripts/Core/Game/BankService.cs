@@ -43,6 +43,11 @@ namespace Core.Game
                 return false;
             }
         }
+
+        public bool CanAfford(uint amount)
+        {
+            return _balance >= amount;
+        }
         
         private void UpdateBalanceDisplay()
         {
