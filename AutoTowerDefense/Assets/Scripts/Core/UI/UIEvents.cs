@@ -1,5 +1,6 @@
 using System;
 using Core.Enums;
+using Core.Game;
 using Core.GameManager;
 using Core.Interfaces;
 using Turrets;
@@ -15,6 +16,7 @@ namespace Core.UI
     {
         private UiController _uiController;
         private LocalGameManager _localGameManager;
+        private TurretRoller _turretRoller;
 
         private void Start()
         {
@@ -29,7 +31,7 @@ namespace Core.UI
 
         public void InitiateTurretDragBuy(int slot)
         {
-            var go = new GameObject();
+            var go = _turretRoller.GetTurretPrefabBySlot(slot);
             
             _uiController.CloseMainSideDrawer();
             
@@ -84,6 +86,7 @@ namespace Core.UI
             var sceneContext = GameObject.Find("Context");
             _localGameManager = sceneContext.GetComponent<LocalGameManager>();
             _uiController = sceneContext.GetComponent<UiController>();
+            _turretRoller = sceneContext.GetComponent<TurretRoller>();
         }
     }
 }

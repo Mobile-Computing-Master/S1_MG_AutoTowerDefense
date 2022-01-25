@@ -1,6 +1,6 @@
 ﻿namespace Core.Enums
 {
-    public enum TurretBuySlot
+    public enum TurretBuySlot : uint
     {
         Upper = 0,
         Middle = 1,
