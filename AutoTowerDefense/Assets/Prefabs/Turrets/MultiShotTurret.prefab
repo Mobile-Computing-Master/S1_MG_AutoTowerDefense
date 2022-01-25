@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  active: 1
   hitsPerSecond: 0.5
+  active: 0
   projectilePrefab: {fileID: 3796866511622362557, guid: 6ad06aba4f027cd4fb1a11b4474cfc4c,
     type: 3}
 --- !u!1 &4209312420009830893

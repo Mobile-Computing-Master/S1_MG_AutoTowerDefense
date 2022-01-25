@@ -163,8 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 50
-  active: 1
   hitsPerSecond: 0.5
+  active: 0
+  projectilePrefab: {fileID: 0}
   damage: 100
 --- !u!1 &4209312420009830893
 GameObject:
