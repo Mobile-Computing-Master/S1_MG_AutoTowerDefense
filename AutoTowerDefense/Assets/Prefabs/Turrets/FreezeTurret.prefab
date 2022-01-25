@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1657556404270968226}
   - component: {fileID: 8344603087429906290}
   - component: {fileID: 7406455945953997425}
+  - component: {fileID: 1270646839247305814}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -100,6 +101,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!50 &1270646839247305814
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2175900249429735857}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &4096835905171625614
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +133,6 @@ GameObject:
   - component: {fileID: 2028769192921499964}
   - component: {fileID: -2190703004252439137}
   - component: {fileID: 2288117603607643681}
-  - component: {fileID: 8460748500194800938}
   m_Layer: 0
   m_Name: FreezeTurret
   m_TagString: Untagged
@@ -169,27 +190,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3796866511622362557, guid: 8b298976ca8d1dc46bc05a0e8928d46c,
     type: 3}
   tier: 1
---- !u!50 &8460748500194800938
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4096835905171625614}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &4209312420009830893
 GameObject:
   m_ObjectHideFlags: 0
