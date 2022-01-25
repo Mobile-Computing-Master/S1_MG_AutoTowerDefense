@@ -6,13 +6,8 @@ namespace Turrets
 {
     public class MoabTurret : TurretBase
     {
-        public new TurretType type = TurretType.Moab;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
-        
+        public override TurretType Type { get; protected set; } = TurretType.Moab;
+
         public void Update()
         {
             if (!active) return;

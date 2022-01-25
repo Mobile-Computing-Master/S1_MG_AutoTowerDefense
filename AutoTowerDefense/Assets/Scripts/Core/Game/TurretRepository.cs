@@ -7,9 +7,9 @@ namespace Core.Game
 {
     public class TurretRepository: MonoBehaviour
     {
-        private List<GameObject> tier1 = new List<GameObject>();
-        private List<GameObject> tier2 = new List<GameObject>();
-        private List<GameObject> tier3 = new List<GameObject>();
+        private readonly List<GameObject> tier1 = new List<GameObject>();
+        private readonly List<GameObject> tier2 = new List<GameObject>();
+        private readonly List<GameObject> tier3 = new List<GameObject>();
         private const int MaxNumberOfSameTurret = 2;
 
         public void AddTurret(GameObject go)
@@ -18,28 +18,51 @@ namespace Core.Game
 
             if (turretBase.tier != TurretTier.Tier1) return;
 
-            var t1Siblings = tier1.FindAll(t => t.GetComponent<TurretBase>().type == turretBase.type);
+            var t1Siblings = tier1.FindAll(t => t.GetComponent<TurretBase>().Type == turretBase.Type);
 
-            if (t1Siblings.Count == 2)
+            if (t1Siblings.Count < 2)
             {
-                t1Siblings.ForEach(Destroy);
-                turretBase.tier++;
-                
-                
-                
-                
-                
-                
-                
-                var t2Siblings = tier2.FindAll(t => t.GetComponent<TurretBase>().type == turretBase.type);
-
-                if (t2Siblings.Count == 2)
-                {
-                    t2Siblings.ForEach(Destroy);
-                    turretBase.tier++;
-                    tier2.Remove()
-                }
+                tier1.Add(go);
             }
+            else
+            {
+                UpgradeToTier2(t1Siblings, turretBase, go);
+            }
+        }
+
+        private void UpgradeToTier2(List<GameObject> t1Siblings, TurretBase turretBase, GameObject go)
+        {
+            RemoveTurretsFromListAndDestroy(tier1, t1Siblings);
+            
+            turretBase.tier++;
+
+            var t2Siblings = tier2.FindAll(t => t.GetComponent<TurretBase>().Type == turretBase.Type);
+
+            if (t2Siblings.Count == 2)
+            {
+                UpgradeToTier3(t2Siblings, turretBase, go);
+            }
+            else
+            {
+                tier2.Add(go);
+            }
+        }
+
+        private void UpgradeToTier3(List<GameObject> t2Siblings, TurretBase turretBase, GameObject go)
+        {
+            RemoveTurretsFromListAndDestroy(tier2, t2Siblings);
+
+            turretBase.tier++;
+            tier3.Add(go);
+        }
+
+        private void RemoveTurretsFromListAndDestroy(List<GameObject> list, List<GameObject> toRemove)
+        {
+            toRemove.ForEach(n =>
+            {
+                list.Remove(n);
+                Destroy(n);
+            });
         }
     }
 }

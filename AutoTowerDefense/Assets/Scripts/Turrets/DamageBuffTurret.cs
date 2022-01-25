@@ -8,13 +8,8 @@ namespace Turrets
 {
     public class DamageBuffTurret : TurretBase
     {
-        public new TurretType type = TurretType.DamageBuff;
+        public TurretType type = TurretType.DamageBuff;
         private List<GameObject> _buffed = new List<GameObject>();
-
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
 
         private void Update()
         {

@@ -7,13 +7,8 @@ namespace Turrets
 {
     public class FreezeTurret : TurretBase
     {
-        public new TurretType type = TurretType.Freeze;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
-        
+        public override TurretType Type { get; protected set; } = TurretType.Freeze;
+
         public void Update()
         {
             if (!active) return;

@@ -7,14 +7,10 @@ namespace Turrets
 {
     public class SniperTurret : TurretBase
     {
-        public new TurretType type = TurretType.Sniper;
+        public override TurretType Type { get; protected set; } = TurretType.Sniper;
+
         public float damage = 1000;
 
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
-        
         public void Update()
         {
             if (!active) return;

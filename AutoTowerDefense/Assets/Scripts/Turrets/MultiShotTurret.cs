@@ -6,13 +6,8 @@ namespace Turrets
 {
     public class MultiShotTurret : TurretBase
     {
-        public new TurretType type = TurretType.Multi;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
-        
+        public override TurretType Type { get; protected set; } = TurretType.Multi;
+
         private void Update()
         {
             if (!active) return;

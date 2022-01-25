@@ -19,7 +19,7 @@ namespace Turrets
         public bool active = false;
         public GameObject projectilePrefab;
         public TurretTier tier = TurretTier.Tier1;
-        public TurretType type = TurretType.None;
+        public virtual TurretType Type { get; protected set; } = TurretType.None;
         
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;
@@ -59,8 +59,6 @@ namespace Turrets
                 _isPlaceable = value;
             }
         }
-
-        public abstract void BuyUpgrade();
         
         private void Awake()
         {

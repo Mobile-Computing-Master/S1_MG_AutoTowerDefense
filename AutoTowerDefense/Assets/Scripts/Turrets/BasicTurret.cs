@@ -7,12 +7,7 @@ namespace Turrets
 {
     public class BasicTurret : TurretBase
     {
-        public new TurretType type = TurretType.Basic;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override TurretType Type { get; protected set; } = TurretType.Basic;
         
         public void Update()
         {

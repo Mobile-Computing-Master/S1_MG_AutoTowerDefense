@@ -47,11 +47,14 @@ namespace Core.Game
             buyableElement.StartBuyPreview();
         }
 
-        public void BuyPreviewedElement()
+        public GameObject BuyPreviewedElement()
         {
             var element = _buyPreviewElement.GetComponent<IBuyable>();
             element.Buy();
+            var boughtElement = _buyPreviewElement;
             _buyPreviewElement = null;
+
+            return boughtElement;
         }
 
         public void CancelBuyPreview()

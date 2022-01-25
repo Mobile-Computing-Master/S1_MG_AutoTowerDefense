@@ -4,11 +4,6 @@ namespace Turrets
 {
     public class ReloadBuffTurret : TurretBase
     {
-        public new TurretType type = TurretType.ReloadBuff;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override TurretType Type { get; protected set; } = TurretType.ReloadBuff;
     }
 }

@@ -6,14 +6,10 @@ namespace Turrets
 {
     public class HazardTurret : TurretBase
     {
-        public new TurretType type = TurretType.Hazard;
+        public override TurretType Type { get; protected set; } = TurretType.Hazard;
+
         public float damage = 5;
-        
-        public override void BuyUpgrade()
-        {
-            throw new System.NotImplementedException();
-        }
-        
+
         public void Update()
         {
             if (!active) return;

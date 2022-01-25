@@ -14,6 +14,7 @@ namespace Core.UI
         private UiController _uiController;
         private LocalGameManager _localGameManager;
         private TurretRoller _turretRoller;
+        private TurretRepository _turretRepository;
 
         private void Start()
         {
@@ -68,10 +69,8 @@ namespace Core.UI
 
         public void ConfirmDragBuy()
         {
-            _localGameManager.BuyPreviewedElement();
-            // add to list of all turrets
-            // lists for t1, t2, t3
-            // 
+            var boughtItem = _localGameManager.BuyPreviewedElement();
+            _turretRepository.AddTurret(boughtItem);
             _localGameManager.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
         }
@@ -88,6 +87,7 @@ namespace Core.UI
             _localGameManager = sceneContext.GetComponent<LocalGameManager>();
             _uiController = sceneContext.GetComponent<UiController>();
             _turretRoller = sceneContext.GetComponent<TurretRoller>();
+            _turretRepository = sceneContext.GetComponent<TurretRepository>();
         }
     }
 }
