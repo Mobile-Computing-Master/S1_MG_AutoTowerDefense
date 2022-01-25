@@ -112,7 +112,7 @@ namespace Core.Controls
         // Register any methods used for cleaning up stuff, when camera is moved
         private void ResetElementsForCameraMove()
         {
-            _uiController.CloseTurretConfirmPopover();
+            _uiController.HideTurretConfirmPopover();
             _localGameManager.CancelBuyPreview();
         }
         

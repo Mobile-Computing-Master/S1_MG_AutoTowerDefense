@@ -31,6 +31,10 @@ namespace Core.UI
 
         public void InitiateTurretDragBuy(int slot)
         {
+            // Clear existing buy previews
+            _localGameManager.CancelBuyPreview();
+            _uiController.HideTurretConfirmPopover();
+            
             var go = _turretRoller.GetTurretPrefabBySlot(slot);
             
             _uiController.CloseMainSideDrawer();
@@ -50,7 +54,7 @@ namespace Core.UI
         {
             var placeableElement = _localGameManager.DraggedElement.GetComponent<IPlaceable>();
 
-            _uiController.OpenTurretConfirmPopover(_localGameManager.DraggedElement.transform.position);
+            _uiController.ShowTurretConfirmPopover(_localGameManager.DraggedElement.transform.position);
             _localGameManager.CancelUiElementDrag();
 
             if (EventSystem.current.IsPointerOverGameObject() || !placeableElement.IsPlaceable)
@@ -72,13 +76,13 @@ namespace Core.UI
             // lists for t1, t2, t3
             // 
             _localGameManager.CancelBuyPreview();
-            _uiController.CloseTurretConfirmPopover();
+            _uiController.HideTurretConfirmPopover();
         }
 
         public void DeclineDragBuy()
         {
             _localGameManager.CancelBuyPreview();
-            _uiController.CloseTurretConfirmPopover();
+            _uiController.HideTurretConfirmPopover();
         }
         
         private void Initiate()

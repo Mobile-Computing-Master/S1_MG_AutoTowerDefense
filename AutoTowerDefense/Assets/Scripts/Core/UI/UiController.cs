@@ -58,8 +58,10 @@ namespace Core.UI
             return _mainSideDrawerIsOpen;
         }
 
-        public void OpenTurretConfirmPopover(Vector3 position)
+        public void ShowTurretConfirmPopover(Vector3 position)
         {
+            if (Camera.main is null) return;
+            
             var transformedVector = Camera.main.WorldToScreenPoint(position);
             transformedVector.z = _turretConfirmPopoverRect.position.z;
             
@@ -67,7 +69,7 @@ namespace Core.UI
             
             _turretConfirmPopoverGameObject.SetActive(true);
         }
-        public void CloseTurretConfirmPopover()
+        public void HideTurretConfirmPopover()
         {
             if (_turretConfirmPopoverGameObject is null) return;
             
