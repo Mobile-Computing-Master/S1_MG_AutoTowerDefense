@@ -151,6 +151,15 @@ namespace Turrets
         {
             var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
                 .GetComponent<ProjectileBase>();
+
+            projectile.damage = tier switch
+            {
+                TurretTier.Tier1 => projectile.damage,
+                TurretTier.Tier2 => projectile.damage * 1.1f,
+                TurretTier.Tier3 => projectile.damage * 1.25f,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            
             projectile.target = target;
         }
     }
