@@ -19,6 +19,7 @@ namespace Turrets
         public bool active = false;
         public GameObject projectilePrefab;
         public TurretTier tier = TurretTier.Tier1;
+        public TurretType type = TurretType.None;
         
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;

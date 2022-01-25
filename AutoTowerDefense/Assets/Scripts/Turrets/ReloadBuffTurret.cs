@@ -2,9 +2,9 @@
 
 namespace Turrets
 {
-    public class MoneyFarmTurret : TurretBase
+    public class ReloadBuffTurret : TurretBase
     {
-        public new TurretType type = TurretType.MoneyFarm;
+        public new TurretType type = TurretType.ReloadBuff;
         
         public override void BuyUpgrade()
         {

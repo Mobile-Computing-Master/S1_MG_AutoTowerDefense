@@ -1,10 +1,13 @@
-﻿using Projectiles;
+﻿using Core.Enums;
+using Projectiles;
 using UnityEngine;
 
 namespace Turrets
 {
     public class MoabTurret : TurretBase
     {
+        public new TurretType type = TurretType.Moab;
+        
         public override void BuyUpgrade()
         {
             throw new System.NotImplementedException();

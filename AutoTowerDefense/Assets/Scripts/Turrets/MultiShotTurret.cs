@@ -1,3 +1,4 @@
+using Core.Enums;
 using Projectiles;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace Turrets
 {
     public class MultiShotTurret : TurretBase
     {
+        public new TurretType type = TurretType.Multi;
+        
         public override void BuyUpgrade()
         {
             throw new System.NotImplementedException();
