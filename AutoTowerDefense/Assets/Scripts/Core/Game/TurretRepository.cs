@@ -17,7 +17,7 @@ namespace Core.Game
 
             if (turretBase.tier != TurretTier.Tier1) return;
             
-            // get number of same type in t1
+            // tier1.Find(t => t.GetComponent<TurretBase>())            
             
         }
     }
