@@ -63,11 +63,11 @@ namespace Turrets
         {
             Initiate();
             
-            var collider = gameObject.GetComponent<CircleCollider2D>();
+            var circleCollider = gameObject.GetComponent<CircleCollider2D>();
 
-            if (!collider) throw new Exception("Attach a 2d circle collider!");
+            if (!circleCollider) throw new Exception("Attach a 2d circle collider!");
 
-            collider.radius = range;
+            circleCollider.radius = range;
             
             Touch.onFingerDown += DetectClick;
             _bodyCollider = gameObject.transform.GetChild(0).gameObject.GetComponent<Collider2D>();
@@ -100,17 +100,18 @@ namespace Turrets
 
         private void DetectClick(Finger finger)
         {
-            Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+            if (Camera.main is null) return;
+
+            var pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+            var hit = Physics2D.Raycast(pos, Vector2.zero);
             
             // Check if body's collider is hit
             if (hit.collider != null && hit.collider == _bodyCollider)
             {
-                if (!IsSelected)
-                {
-                    IsSelected = true;
-                    _localGameManager.SetSelectedTurret(this);
-                }
+                if (IsSelected) return;
+                
+                IsSelected = true;
+                _localGameManager.SetSelectedTurret(this);
             }
             else
             {

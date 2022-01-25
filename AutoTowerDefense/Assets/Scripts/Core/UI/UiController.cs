@@ -69,8 +69,7 @@ namespace Core.UI
         }
         public void CloseTurretConfirmPopover()
         {
-            _turretConfirmPopoverGameObject = GameObject.Find("TurretConfirmPopover");
-            _turretConfirmPopoverRect = _turretConfirmPopoverGameObject.GetComponent<Canvas>().GetComponent<RectTransform>();
+            if (_turretConfirmPopoverGameObject is null) return;
             
             _turretConfirmPopoverGameObject.SetActive(false);
         }
