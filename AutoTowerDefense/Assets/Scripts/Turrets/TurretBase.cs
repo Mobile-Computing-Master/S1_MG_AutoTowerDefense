@@ -6,6 +6,7 @@ using Core.Game;
 using Core.Interfaces;
 using Core.Map;
 using Mobs;
+using Projectiles;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -144,6 +145,13 @@ namespace Turrets
         public void UpdatePreview(Vector3 position)
         {
             IsPlaceable = !_mapManager.IsInProtectedSpace(position);
+        }
+
+        protected virtual void Shoot(GameObject target)
+        {
+            var projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity)
+                .GetComponent<ProjectileBase>();
+            projectile.target = target;
         }
     }
 }
