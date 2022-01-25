@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using System;
+using Core.Enums;
 using Mobs;
 using Path;
 using UnityEngine;
@@ -24,6 +25,14 @@ namespace Turrets
 
         protected override void Shoot(GameObject target)
         {
+            damage = tier switch
+            {
+                TurretTier.Tier1 => damage * DamageMultiplier,
+                TurretTier.Tier2 => damage * DamageMultiplier * 1.25f,
+                TurretTier.Tier3 => damage * DamageMultiplier * 1.5f,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            
             target.GetComponent<Creep>().hp -= damage;
         }
         
