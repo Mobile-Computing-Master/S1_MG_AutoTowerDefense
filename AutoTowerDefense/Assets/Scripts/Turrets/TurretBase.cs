@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Game;
-using Core.GameManager;
 using Core.Interfaces;
 using Core.Map;
 using Mobs;
@@ -18,6 +17,7 @@ namespace Turrets
         public float hitsPerSecond = 2;
         public bool active = false;
         public GameObject projectilePrefab;
+        public TurretTier tier = TurretTier.Tier1;
         
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;
