@@ -1,4 +1,5 @@
 using System;
+using Core.Enums;
 using Core.GameManager;
 using Core.Interfaces;
 using Turrets;
@@ -26,9 +27,14 @@ namespace Core.UI
             _uiController.ToggleMainSideDrawer();
         }
 
-        public void InitiateDragBuy(GameObject go)
+        public void InitiateTurretDragBuy(int slot)
         {
+            var go = new GameObject();
+            
             _uiController.CloseMainSideDrawer();
+            
+            if (Camera.main is null) return;
+
             var spawnPosition = Camera.main.ScreenToWorldPoint(Touch.activeFingers[0].screenPosition);
             spawnPosition.z = 0;
             var spawnedGameObject = Instantiate(go, spawnPosition, Quaternion.identity);
@@ -38,7 +44,7 @@ namespace Core.UI
             _localGameManager.SetElementForBuyPreview(spawnedGameObject);
         }
         
-        public void EndDragBuy()
+        public void EndTurretDragBuy()
         {
             var placeableElement = _localGameManager.DraggedElement.GetComponent<IPlaceable>();
 
@@ -60,6 +66,9 @@ namespace Core.UI
         public void ConfirmDragBuy()
         {
             _localGameManager.BuyPreviewedElement();
+            // add to list of all turrets
+            // lists for t1, t2, t3
+            // 
             _localGameManager.CancelBuyPreview();
             _uiController.CloseTurretConfirmPopover();
         }
