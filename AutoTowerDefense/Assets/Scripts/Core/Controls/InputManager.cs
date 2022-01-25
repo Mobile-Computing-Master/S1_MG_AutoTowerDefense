@@ -1,11 +1,9 @@
-using System;
 using Core.GameManager;
 using Core.Interfaces;
 using Core.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Zenject;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 namespace Core.Controls

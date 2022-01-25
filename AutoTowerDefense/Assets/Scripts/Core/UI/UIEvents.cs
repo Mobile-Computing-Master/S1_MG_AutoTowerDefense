@@ -1,12 +1,8 @@
-using System;
-using Core.Enums;
 using Core.GameManager;
 using Core.Interfaces;
-using Turrets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Core.UI
