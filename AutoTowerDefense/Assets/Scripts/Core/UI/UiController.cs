@@ -30,18 +30,17 @@ namespace Core.UI
 
         public void OpenMainSideDrawer()
         {
-            _mainSideDrawerAnimator[DrawerAnimName].speed = -MainSideDrawerSpeed;
-            _mainSideDrawerAnimator[DrawerAnimName].time = _mainSideDrawerAnimator[DrawerAnimName].length;
+            _mainSideDrawerAnimator[DrawerAnimName].speed = MainSideDrawerSpeed;
             _mainSideDrawerAnimator.Play(DrawerAnimName);
             _mainSideDrawerIsOpen = true;
         }
 
         public void CloseMainSideDrawer()
         {
-            _mainSideDrawerAnimator[DrawerAnimName].speed = MainSideDrawerSpeed;
+            _mainSideDrawerAnimator[DrawerAnimName].speed = -MainSideDrawerSpeed;
+            _mainSideDrawerAnimator[DrawerAnimName].time = _mainSideDrawerAnimator[DrawerAnimName].length;
             _mainSideDrawerAnimator.Play(DrawerAnimName);
             _mainSideDrawerIsOpen = false;
-
         }
 
         public bool ToggleMainSideDrawer()
