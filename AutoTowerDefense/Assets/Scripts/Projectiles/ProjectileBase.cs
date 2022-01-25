@@ -19,12 +19,11 @@ namespace Projectiles
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.GetInstanceID() == target.GetInstanceID())
-            {
-                if (target == null) return;
-                target.GetComponent<Creep>().hp -= damage;
-                Destroy(gameObject);
-            }
+            if (other.gameObject.GetInstanceID() != target.GetInstanceID()) return;
+            if (target == null) return;
+            
+            target.GetComponent<Creep>().hp -= damage;
+            Destroy(gameObject);
         }
 
         private void OnBecameInvisible()
