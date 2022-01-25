@@ -25,8 +25,9 @@ namespace Turrets
         protected readonly List<GameObject> InRange = new List<GameObject>();
         protected float ReloadTime = 0f;
         
-        private LocalGameManager _localGameManager;
+        private BuyService _buyService;
         private MapManager _mapManager;
+        private TurretRepository _turretRepository;
         private Collider2D _bodyCollider = null;
 
         public delegate void SelectTurret(bool selected);
@@ -49,6 +50,7 @@ namespace Turrets
         public delegate void CanPlaceTurret(bool canPlace);
         public event CanPlaceTurret OnCanPlaceTurretChanged;
         private bool _isPlaceable = false;
+
         public bool IsPlaceable
         {
             get => _isPlaceable;
@@ -96,8 +98,9 @@ namespace Turrets
         private void Initiate()
         {
             var sceneContext = GameObject.Find("Context");
-            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _buyService = sceneContext.GetComponent<BuyService>();
             _mapManager = sceneContext.GetComponent<MapManager>();
+            _turretRepository = sceneContext.GetComponent<TurretRepository>();
         }
 
         private void DetectClick(Finger finger)
@@ -113,7 +116,7 @@ namespace Turrets
                 if (IsSelected) return;
                 
                 IsSelected = true;
-                _localGameManager.SetSelectedTurret(this);
+                _turretRepository.SetSelectedTurret(this);
             }
             else
             {

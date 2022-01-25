@@ -11,7 +11,7 @@ namespace Core.Controls
 {
     public class InputManager : MonoBehaviour
     {
-        private LocalGameManager _localGameManager;
+        private BuyService _buyService;
         private UiController _uiController;
         
         public float leftBorder;
@@ -46,15 +46,15 @@ namespace Core.Controls
 
         private void Update()
         {
-            if (EventSystem.current.IsPointerOverGameObject() && !_isDragging && !_localGameManager.UiElementIsDragged) return;
+            if (EventSystem.current.IsPointerOverGameObject() && !_isDragging && !_buyService.UiElementIsDragged) return;
 
-            if (Touch.activeFingers.Count == 1 && !_localGameManager.UiElementIsDragged)
+            if (Touch.activeFingers.Count == 1 && !_buyService.UiElementIsDragged)
             {
                 MoveCamera(Touch.activeTouches[0]);
             }
-            else if (_localGameManager.UiElementIsDragged)
+            else if (_buyService.UiElementIsDragged)
             {
-                DragGameObject(Touch.activeTouches[0], _localGameManager.DraggedElement);
+                DragGameObject(Touch.activeTouches[0], _buyService.DraggedElement);
             }
 
             // if (Touch.activeFingers.Count == 2)
@@ -111,7 +111,7 @@ namespace Core.Controls
         private void ResetElementsForCameraMove()
         {
             _uiController.HideTurretConfirmPopover();
-            _localGameManager.CancelBuyPreview();
+            _buyService.CancelBuyPreview();
         }
         
         // postpone for now
@@ -139,7 +139,7 @@ namespace Core.Controls
         private void Initiate()
         {
             var sceneContext = GameObject.Find("Context");
-            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _buyService = sceneContext.GetComponent<BuyService>();
             _uiController = sceneContext.GetComponent<UiController>();
         }
     }

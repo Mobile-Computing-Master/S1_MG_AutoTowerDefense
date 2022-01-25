@@ -7,7 +7,6 @@ namespace Core.Interfaces
         public int Buy();
         public void StartBuyPreview();
         public void EndBuyPreview();
-
         public void UpdatePreview(Vector3 position);
     }
 }

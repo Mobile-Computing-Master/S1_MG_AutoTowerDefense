@@ -11,7 +11,10 @@ namespace Core.Game
         private readonly List<GameObject> tier2 = new List<GameObject>();
         private readonly List<GameObject> tier3 = new List<GameObject>();
         private const int MaxNumberOfSameTurret = 2;
+        
+        private TurretBase _selectedTurret = null;
 
+        
         public void AddTurret(GameObject go)
         {
             var turretBase = go.GetComponent<TurretBase>();
@@ -28,6 +31,11 @@ namespace Core.Game
             {
                 UpgradeToTier2(t1Siblings, turretBase, go);
             }
+        }
+        
+        public void SetSelectedTurret(TurretBase turret)
+        {
+            _selectedTurret = turret;
         }
 
         private void UpgradeToTier2(List<GameObject> t1Siblings, TurretBase turretBase, GameObject go)

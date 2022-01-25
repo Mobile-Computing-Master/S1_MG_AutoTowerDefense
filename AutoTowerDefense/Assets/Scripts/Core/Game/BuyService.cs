@@ -1,21 +1,15 @@
 using Core.Interfaces;
-using Turrets;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Core.Game
 {
-    public class LocalGameManager : MonoBehaviour
+    public class BuyService : MonoBehaviour
     {
-        private TurretBase _selectedTurret = null;
-        private bool _uiElementIsDragged = false;
-        private GameObject _dragAttachedElement = null;
         private GameObject _buyPreviewElement;
 
-        public void SetSelectedTurret(TurretBase turret)
-        {
-            _selectedTurret = turret;
-        }
+        private bool _uiElementIsDragged = false;
+        private GameObject _dragAttachedElement = null;
 
         public bool UiElementIsDragged => _uiElementIsDragged;
 

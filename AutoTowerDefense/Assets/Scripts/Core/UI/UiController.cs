@@ -21,6 +21,8 @@ namespace Core.UI
 
         private GameObject _trash = null;
         private RectTransform _trashRect = null;
+        
+        
 
         private void Start()
         {

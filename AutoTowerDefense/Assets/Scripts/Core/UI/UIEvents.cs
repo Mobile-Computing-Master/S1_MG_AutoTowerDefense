@@ -12,7 +12,7 @@ namespace Core.UI
     public class UIEvents : MonoBehaviour
     {
         private UiController _uiController;
-        private LocalGameManager _localGameManager;
+        private BuyService _buyService;
         private TurretRoller _turretRoller;
         private TurretRepository _turretRepository;
 
@@ -30,7 +30,7 @@ namespace Core.UI
         public void InitiateTurretDragBuy(int slot)
         {
             // Clear existing buy previews
-            _localGameManager.CancelBuyPreview();
+            _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
             
             var go = _turretRoller.GetTurretPrefabBySlot(slot);
@@ -44,16 +44,16 @@ namespace Core.UI
             var spawnedGameObject = Instantiate(go, spawnPosition, Quaternion.identity);
 
             _uiController.ShowTrash();
-            _localGameManager.StartUiElementDrag(spawnedGameObject);
-            _localGameManager.SetElementForBuyPreview(spawnedGameObject);
+            _buyService.StartUiElementDrag(spawnedGameObject);
+            _buyService.SetElementForBuyPreview(spawnedGameObject);
         }
         
         public void EndTurretDragBuy()
         {
-            var placeableElement = _localGameManager.DraggedElement.GetComponent<IPlaceable>();
+            var placeableElement = _buyService.DraggedElement.GetComponent<IPlaceable>();
 
-            _uiController.ShowTurretConfirmPopover(_localGameManager.DraggedElement.transform.position);
-            _localGameManager.CancelUiElementDrag();
+            _uiController.ShowTurretConfirmPopover(_buyService.DraggedElement.transform.position);
+            _buyService.CancelUiElementDrag();
 
             if (EventSystem.current.IsPointerOverGameObject() || !placeableElement.IsPlaceable)
             {
@@ -69,22 +69,22 @@ namespace Core.UI
 
         public void ConfirmDragBuy()
         {
-            var boughtItem = _localGameManager.BuyPreviewedElement();
+            var boughtItem = _buyService.BuyPreviewedElement();
             _turretRepository.AddTurret(boughtItem);
-            _localGameManager.CancelBuyPreview();
+            _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
         }
 
         public void DeclineDragBuy()
         {
-            _localGameManager.CancelBuyPreview();
+            _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
         }
         
         private void Initiate()
         {
             var sceneContext = GameObject.Find("Context");
-            _localGameManager = sceneContext.GetComponent<LocalGameManager>();
+            _buyService = sceneContext.GetComponent<BuyService>();
             _uiController = sceneContext.GetComponent<UiController>();
             _turretRoller = sceneContext.GetComponent<TurretRoller>();
             _turretRepository = sceneContext.GetComponent<TurretRepository>();
