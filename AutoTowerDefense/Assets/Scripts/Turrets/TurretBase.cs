@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Core.GameManager;
 using Core.Interfaces;
 using Core.Map;
+using Mobs;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -11,7 +14,13 @@ namespace Turrets
     public abstract class TurretBase : MonoBehaviour, IBuyable, IPlaceable
     {
         public float range = 4f;
+        public float hitsPerSecond = 2;
         public bool active = false;
+        public GameObject projectilePrefab;
+        
+        protected readonly List<GameObject> InRange = new List<GameObject>();
+        protected float ReloadTime = 0f;
+        
         private LocalGameManager _localGameManager;
         private MapManager _mapManager;
         private Collider2D _bodyCollider = null;
@@ -26,11 +35,10 @@ namespace Turrets
             get => _isSelected;
             set
             {
-                if (value != _isSelected)
-                {
-                    OnTurretSelected?.Invoke(value);
-                    _isSelected = value;
-                }
+                if (value == _isSelected) return;
+                
+                OnTurretSelected?.Invoke(value);
+                _isSelected = value;
             }
         }
 
@@ -42,11 +50,10 @@ namespace Turrets
             get => _isPlaceable;
             set
             {
-                if (value != _isPlaceable)
-                {
-                    OnCanPlaceTurretChanged?.Invoke(value);
-                    _isPlaceable = value;
-                }
+                if (value == _isPlaceable) return;
+                
+                OnCanPlaceTurretChanged?.Invoke(value);
+                _isPlaceable = value;
             }
         }
 
@@ -66,6 +73,22 @@ namespace Turrets
             _bodyCollider = gameObject.transform.GetChild(0).gameObject.GetComponent<Collider2D>();
 
             if (!_bodyCollider) throw new Exception("Attach a body with a 2D collider");
+        }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.GetComponent<Creep>() == null) return;
+            if (InRange.Contains(other.gameObject)) return;
+            
+            InRange.Add(other.gameObject);
+        }
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.GetComponent<Creep>() == null) return;
+            if (!InRange.Contains(other.gameObject)) return;
+            
+            InRange.Remove(other.gameObject);
         }
 
         private void Initiate()
