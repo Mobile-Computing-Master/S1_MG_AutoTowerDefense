@@ -1,7 +1,6 @@
 using System;
 using Core.Enums;
 using Core.Game;
-using Core.GameManager;
 using Core.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
