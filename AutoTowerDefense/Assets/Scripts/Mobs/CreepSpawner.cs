@@ -13,17 +13,7 @@ namespace Mobs
         public int roundSize = 10;
         public List<GameObject> creepPrefabs = new List<GameObject>();
         private float _creepCooldown = 0.25f;
-        private readonly Stack<int> _spawnQueue = new Stack<int>(); 
-
-        private void Start()
-        {
-            var max = creepPrefabs.Count;
-            var random = new Random();
-            for (var i = 0; i < roundSize; i++)
-            {
-                _spawnQueue.Push(random.Next(max));
-            }
-        }
+        private Queue<int> _spawnQueue = new Queue<int>(); 
 
         private void Update()
         {
@@ -33,9 +23,27 @@ namespace Mobs
 
             if (!(_creepCooldown >= 1 / creepsPerSecond)) return;
             
-            var t = Instantiate(creepPrefabs[_spawnQueue.Pop()], pathMap.creepSpawnPoint, Quaternion.identity);
+            var t = Instantiate(creepPrefabs[_spawnQueue.Dequeue()], pathMap.creepSpawnPoint, Quaternion.identity);
             t.GetComponent<CreepBase>().Path = pathMap;
             _creepCooldown = 0;
+        }
+
+        public void FillCreepQueue()
+        {
+            var max = creepPrefabs.Count;
+            var random = new Random();
+            var queue = new Queue<int>();
+            for (var i = 0; i < roundSize; i++)
+            {
+                queue.Enqueue(random.Next(max));
+            }
+
+            _spawnQueue = queue;
+        }
+
+        public bool IsEverythingSpawned()
+        {
+            return _spawnQueue.Count == 0;
         }
     }
 }
