@@ -14,6 +14,8 @@ namespace Core.Game
         private HealthService _healthService;
         private bool _playerDied = false;
 
+        private bool _shouldRoll = false;
+
         private TurretRoller _turretRoller;
 
         private void Start()
@@ -31,15 +33,21 @@ namespace Core.Game
             var creeps = FindObjectsOfType<CreepBase>();
             if (creeps.Length > 0) return;
 
-            _turretRoller.ResetTurretSlots();
-            _turretRoller.RollTurrets();
+            if (_shouldRoll)
+            {
+                _turretRoller.ResetTurretSlots();
+                _turretRoller.RollTurrets();
+                _shouldRoll = false;
+            }
             
             _roundCooldown += Time.deltaTime;
             if (_roundCooldown < timeBetweenRounds) return;
-
+            
             _spawner.roundSize = (int)(_spawner.roundSize * creepIncreaseMultiplier);
             _spawner.FillCreepQueue();
             _roundCooldown = 0;
+
+            _shouldRoll = true;
         }
 
         private void OnPlayerDied()
