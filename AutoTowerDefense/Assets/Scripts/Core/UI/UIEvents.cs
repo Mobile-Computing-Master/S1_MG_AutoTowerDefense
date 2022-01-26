@@ -21,7 +21,7 @@ namespace Core.UI
         private BankService _bankService;
         private const string TurretFrameName = "turretFrame_";
 
-        private void Start()
+        private void OnEnable()
         {
             Initiate();
             TouchSimulation.Enable();

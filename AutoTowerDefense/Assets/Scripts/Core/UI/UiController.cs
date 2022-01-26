@@ -113,8 +113,7 @@ namespace Core.UI
             for (var i = 0; i < _turretRoller.numberOfSlots; i++)
             {
                 _turretFrames[i].GetComponent<Text>().text =
-                    TurretPrices.GetPriceByTurretType(
-                        _turretRoller.GetTurretPrefabBySlot(i).GetComponent<TurretBase>().Type).ToString();
+                    $"{TurretPrices.GetPriceByTurretType(_turretRoller.GetTurretPrefabBySlot(i).GetComponent<TurretBase>().Type)}";
             }
         }
         

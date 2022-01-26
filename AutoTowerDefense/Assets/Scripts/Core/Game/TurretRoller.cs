@@ -43,7 +43,7 @@ namespace Core.Game
                 rolledTurrets[i] = turretPrefabs[r.Next(0, turretPrefabs.Count)];
             }
             
-            OnRollChanged?.Invoke(turretPrefabs);
+            OnRollChanged?.Invoke(rolledTurrets);
         }
     }
 }

@@ -47,22 +47,12 @@ namespace Core.UI.Components
         
         private void TurretRollerOnOnRollChanged(List<GameObject> turretPrefabs)
         {
-            // if (!_bankService.CanAfford(
-            //     TurretPrices.GetPriceByTurretType(turretPrefabs[slot].GetComponent<TurretBase>().Type)) && !_alreadyBought)
-            // {
-            //     gameObject.GetComponent<Image>().color = _shade;
-            // }
-            // else
-            // {
-            //     gameObject.GetComponent<Image>().color = _noShade;
-            // }
-            
             BankServiceOnBalanceChanged(_bankService.GetBalance());
         }
         
         private void BankServiceOnBalanceChanged(uint balance)
         {
-            var price = TurretPrices.GetPriceByTurretType(_turretRoller.turretPrefabs[slot].GetComponent<TurretBase>().Type);
+            var price = TurretPrices.GetPriceByTurretType(_turretRoller.GetTurretPrefabBySlot(slot).GetComponent<TurretBase>().Type);
 
             if (price > balance && !_alreadyBought)
             {
