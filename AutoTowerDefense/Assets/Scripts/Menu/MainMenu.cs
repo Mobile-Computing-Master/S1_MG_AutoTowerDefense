@@ -15,7 +15,7 @@ namespace Menu
 
         public void StartMap(int mapNumber)
         {
-            if (mapNumber == 1)
+            if (mapNumber == 0)
             {
                 SceneManager.LoadScene("Scenes/main");
             }
