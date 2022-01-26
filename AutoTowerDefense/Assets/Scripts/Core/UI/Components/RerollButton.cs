@@ -28,7 +28,6 @@ namespace Core.UI.Components
             else
             {
                 gameObject.GetComponent<Image>().color = _noShade;
-
             }
         }
 
