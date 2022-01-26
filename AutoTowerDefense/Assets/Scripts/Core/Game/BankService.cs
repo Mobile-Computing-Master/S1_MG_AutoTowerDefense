@@ -6,7 +6,7 @@ namespace Core.Game
 {
     public class BankService : MonoBehaviour
     {
-        private uint _balance = 69;
+        private uint _balance = 50;
 
         private GameObject _balanceDisplay;
         private const string BalanceDisplayName = "coin_amount";

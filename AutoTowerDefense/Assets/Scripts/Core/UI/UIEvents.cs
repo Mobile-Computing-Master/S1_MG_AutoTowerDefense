@@ -2,6 +2,8 @@ using System;
 using Core.Enums;
 using Core.Game;
 using Core.Interfaces;
+using Turrets;
+using Turrets.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -15,6 +17,7 @@ namespace Core.UI
         private BuyService _buyService;
         private TurretRoller _turretRoller;
         private TurretRepository _turretRepository;
+        private BankService _bankService;
 
         private void Start()
         {
@@ -34,8 +37,9 @@ namespace Core.UI
             _uiController.HideTurretConfirmPopover();
             
             var go = _turretRoller.GetTurretPrefabBySlot(slot);
-            
-            
+
+            if (!_bankService.CanAfford(TurretPrices.GetPriceByTurretType(go.GetComponent<TurretBase>().Type))) return;
+
             _uiController.CloseMainSideDrawer();
             
             if (Camera.main is null) return;
@@ -51,6 +55,8 @@ namespace Core.UI
         
         public void EndTurretDragBuy()
         {
+            if (_buyService.DraggedElement is null) return;
+            
             var placeableElement = _buyService.DraggedElement.GetComponent<IPlaceable>();
 
             _uiController.ShowTurretConfirmPopover(_buyService.DraggedElement.transform.position);
@@ -89,6 +95,7 @@ namespace Core.UI
             _uiController = sceneContext.GetComponent<UiController>();
             _turretRoller = sceneContext.GetComponent<TurretRoller>();
             _turretRepository = sceneContext.GetComponent<TurretRepository>();
+            _bankService = sceneContext.GetComponent<BankService>();
         }
     }
 }
