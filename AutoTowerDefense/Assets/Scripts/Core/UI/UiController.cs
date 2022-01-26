@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
+using Core.Game;
+using Turrets;
+using Turrets.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Core.UI
@@ -21,13 +26,17 @@ namespace Core.UI
 
         private GameObject _trash = null;
         private RectTransform _trashRect = null;
-        
-        
 
+        private List<GameObject> _turretFrames = new List<GameObject>();
+
+        private TurretRoller _turretRoller;
+        
         private void Start()
         {
             Initiate();
             HideTrash();
+            
+            _turretRoller.OnRollChanged += UpdateTurretPrices;
         }
 
         public void OpenMainSideDrawer()
@@ -87,6 +96,16 @@ namespace Core.UI
             _trash.GetComponent<CanvasRenderer>().gameObject.SetActive(false);
         }
         
+        private void UpdateTurretPrices(List<GameObject> turretPrefabs)
+        {
+            for (var i = 0; i < _turretRoller.numberOfSlots; i++)
+            {
+                _turretFrames[i].GetComponent<Text>().text =
+                    TurretPrices.GetPriceByTurretType(
+                        _turretRoller.GetTurretPrefabBySlot(i).GetComponent<TurretBase>().Type).ToString();
+            }
+        }
+        
         private void Initiate()
         {
             Touch.onFingerUp += finger => LastFingerTouchScreenPosition = finger.screenPosition;
@@ -99,7 +118,12 @@ namespace Core.UI
             
             _trash = GameObject.Find("Trash");
             _trashRect = _trash.GetComponent<RectTransform>();
-
+            
+            _turretRoller = GameObject.Find("Context").GetComponent<TurretRoller>();
+            
+            _turretFrames.Add(GameObject.Find("Frame_Coins_count_1"));
+            _turretFrames.Add(GameObject.Find("Frame_Coins_count_2"));
+            _turretFrames.Add(GameObject.Find("Frame_Coins_count_3"));
         }
     }
 }

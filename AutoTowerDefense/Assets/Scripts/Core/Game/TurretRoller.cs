@@ -12,6 +12,11 @@ namespace Core.Game
     {
         public int numberOfSlots = 3;
         public List<GameObject> turretPrefabs = new List<GameObject>();
+
+        public delegate void RollChange(List<GameObject> turretPrefabs);
+
+        public event RollChange OnRollChanged;
+        
         private readonly List<GameObject>rolledTurrets = new List<GameObject>() {null, null, null};
 
         private void Start()
@@ -36,6 +41,8 @@ namespace Core.Game
             {
                 rolledTurrets[i] = turretPrefabs[r.Next(0, turretPrefabs.Count)];
             }
+            
+            OnRollChanged?.Invoke(turretPrefabs);
         }
     }
 }
