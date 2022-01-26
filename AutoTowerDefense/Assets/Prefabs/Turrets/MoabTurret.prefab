@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 10
-  hitsPerSecond: 1000
+  hitsPerSecond: 0.25
   active: 0
   projectilePrefab: {fileID: 3796866511622362557, guid: 399db93f0d0d32e49a08055445583d16,
     type: 3}

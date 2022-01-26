@@ -1,3 +1,5 @@
+using System;
+using Core.Game;
 using Path;
 using UnityEngine;
 
@@ -9,6 +11,12 @@ namespace Mobs
         public float speed = 1;
         public float hp = 100;
         private int _currentPointIndex = 0;
+        private BankService _bankService;
+
+        private void OnEnable()
+        {
+            Initiate();
+        }
 
         private void Update()
         {
@@ -27,8 +35,15 @@ namespace Mobs
 
             if (hp <= 0)
             {
+                // TODO: Fix me
+                _bankService.Add(2);
                 Destroy(gameObject);
             }
+        }
+        
+        private void Initiate()
+        {
+            _bankService = GameObject.Find("Context").GetComponent<BankService>();
         }
     }
 }

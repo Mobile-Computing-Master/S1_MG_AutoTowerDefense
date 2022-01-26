@@ -43,7 +43,7 @@ namespace Core.UI.Components
 
         private void SpawnFullHearts(uint health)
         {
-            for (int i = 0; i <= health; i = i + 2)
+            for (int i = 0; i < health; i = i + 2)
             {
                 var h =Instantiate(fullHeartPrefab, _healthBar.transform);
                 h.GetComponent<RectTransform>().localPosition = new Vector3((i * HeartOffset / 2) - _healthBar.GetComponent<RectTransform>().rect.width / 2, 0, 0);
