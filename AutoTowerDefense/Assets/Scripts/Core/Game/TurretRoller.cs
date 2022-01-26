@@ -61,6 +61,17 @@ namespace Core.Game
             }
         }
 
+        public void DestroyPreviewInSlot(int i)
+        {
+            var preview = GameObject.Find($"{TurretPreviewName}{i}");
+                
+            if (preview.transform.childCount > 0)
+            {
+                var child = preview.transform.GetChild(0);
+                Destroy(child.gameObject);
+            }
+        }
+
         private void SetTurretPreviews()
         {
             for (int i = 0; i <numberOfSlots; i++)

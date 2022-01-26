@@ -7,7 +7,8 @@ namespace Menu
         private GameObject _helpWrapper;
         private GameObject _helpButton;
         private GameObject _background;
-
+        private GameObject _drawer;
+        
         private void Start()
         {
             Initiate();
@@ -18,6 +19,7 @@ namespace Menu
             _helpWrapper.SetActive(true);
             _helpButton.SetActive(false);
             _background.SetActive(true);
+            _drawer.SetActive(false);
             Time.timeScale = 0;
         }
 
@@ -26,6 +28,7 @@ namespace Menu
             _helpWrapper.SetActive(false);
             _helpButton.SetActive(true);
             _background.SetActive(false);
+            _drawer.SetActive(true);
             Time.timeScale = 1;
         }
 
@@ -34,6 +37,7 @@ namespace Menu
             _helpWrapper = GameObject.Find("HelpWrapper");
             _helpButton = GameObject.Find("HelpButton");
             _background = GameObject.Find("Background");
+            _drawer = GameObject.Find("MainSideDrawer");
             
             HideHelp();
         }

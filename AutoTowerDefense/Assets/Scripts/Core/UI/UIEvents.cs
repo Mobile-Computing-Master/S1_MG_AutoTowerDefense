@@ -85,6 +85,7 @@ namespace Core.UI
             var boughtItem = _buyService.BuyPreviewedElement();
             DisableSlot(_uiController.GetActiveSlot());
             
+            _turretRoller.DestroyPreviewInSlot(_uiController.GetActiveSlot());
             _uiController.SetActiveSlot(-1);
             _turretRepository.AddTurret(boughtItem);
             _buyService.CancelBuyPreview();
