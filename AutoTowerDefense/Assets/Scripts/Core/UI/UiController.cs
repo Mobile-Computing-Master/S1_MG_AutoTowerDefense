@@ -30,15 +30,30 @@ namespace Core.UI
         private readonly List<GameObject> _turretFrames = new List<GameObject>();
 
         private TurretRoller _turretRoller;
+        private HealthService _healthService;
 
         private int _activeSlot = -1;
         
-        private void Start()
+        private GameObject _helpWrapper;
+        private GameObject _helpButton;
+        private GameObject _background;
+        private GameObject _drawer;
+        private GameObject _gameOver;
+        public GameObject roundsCount;
+        
+        private void OnEnable()
         {
             Initiate();
             HideTrash();
             
             _turretRoller.OnRollChanged += UpdateTurretPrices;
+            _healthService.OnPlayerDied += HealthServiceOnOnPlayerDied;
+        }
+
+        private void HealthServiceOnOnPlayerDied()
+        {
+            // TODO: Fix number of rounds
+            ShowGameOver(1);
         }
 
         public void OpenMainSideDrawer()
@@ -108,6 +123,16 @@ namespace Core.UI
             _activeSlot = slot;
         }
         
+        public void ShowGameOver(int numberOfRounds)
+        {
+            roundsCount.GetComponent<Text>().text = numberOfRounds.ToString();
+            _helpWrapper.SetActive(false);
+            _helpButton.SetActive(false);
+            _background.SetActive(true);
+            _drawer.SetActive(false);
+            _gameOver.SetActive(true);
+        }
+        
         private void UpdateTurretPrices(List<GameObject> turretPrefabs)
         {
             for (var i = 0; i < _turretRoller.numberOfSlots; i++)
@@ -131,10 +156,17 @@ namespace Core.UI
             _trashRect = _trash.GetComponent<RectTransform>();
             
             _turretRoller = GameObject.Find("Context").GetComponent<TurretRoller>();
+            _healthService = GameObject.Find("Context").GetComponent<HealthService>();
             
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_0"));
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_1"));
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_2"));
+
+            _helpWrapper = GameObject.Find("HelpWrapper");
+            _helpButton = GameObject.Find("HelpButton");
+            _background = GameObject.Find("Background");
+            _drawer = GameObject.Find("MainSideDrawer");
+            _gameOver = GameObject.Find("GameOver");
         }
     }
 }

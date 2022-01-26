@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Menu
 {
@@ -8,6 +9,7 @@ namespace Menu
         private GameObject _helpButton;
         private GameObject _background;
         private GameObject _drawer;
+        private GameObject _gameOver;
         
         private void Start()
         {
@@ -32,14 +34,26 @@ namespace Menu
             Time.timeScale = 1;
         }
 
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene("Scenes/menu");
+        }
+
+        public void Exit()
+        {
+            Application.Quit();
+        }
+
         private void Initiate()
         {
             _helpWrapper = GameObject.Find("HelpWrapper");
             _helpButton = GameObject.Find("HelpButton");
             _background = GameObject.Find("Background");
             _drawer = GameObject.Find("MainSideDrawer");
+            _gameOver = GameObject.Find("GameOver");
             
             HideHelp();
+            _gameOver.SetActive(false);
         }
     }
 }
