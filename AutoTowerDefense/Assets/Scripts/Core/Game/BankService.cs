@@ -6,7 +6,10 @@ namespace Core.Game
 {
     public class BankService : MonoBehaviour
     {
-        private uint _balance = 50;
+        public delegate void BalanceChanged(uint balance);
+        public event BalanceChanged OnBalanceChanged;
+        
+        private uint _balance = 10;
 
         private GameObject _balanceDisplay;
         private const string BalanceDisplayName = "coin_amount";
@@ -51,6 +54,7 @@ namespace Core.Game
         
         private void UpdateBalanceDisplay()
         {
+            OnBalanceChanged?.Invoke(_balance);
             _balanceDisplay.GetComponent<Text>().text = _balance.ToString();
         }
         

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Core.Enums;
+using Turrets;
 using UnityEngine;
 using Random = System.Random;
 
@@ -32,7 +33,7 @@ namespace Core.Game
             
             return rolledTurrets[slot];
         }
-
+        
         public void RollTurrets()
         {
             Random r = new Random();

@@ -27,9 +27,11 @@ namespace Core.UI
         private GameObject _trash = null;
         private RectTransform _trashRect = null;
 
-        private List<GameObject> _turretFrames = new List<GameObject>();
+        private readonly List<GameObject> _turretFrames = new List<GameObject>();
 
         private TurretRoller _turretRoller;
+
+        private int _activeSlot = -1;
         
         private void Start()
         {
@@ -95,6 +97,16 @@ namespace Core.UI
         {
             _trash.GetComponent<CanvasRenderer>().gameObject.SetActive(false);
         }
+
+        public int GetActiveSlot()
+        {
+            return _activeSlot;
+        }
+
+        public void SetActiveSlot(int slot)
+        {
+            _activeSlot = slot;
+        }
         
         private void UpdateTurretPrices(List<GameObject> turretPrefabs)
         {
@@ -121,9 +133,9 @@ namespace Core.UI
             
             _turretRoller = GameObject.Find("Context").GetComponent<TurretRoller>();
             
+            _turretFrames.Add(GameObject.Find("Frame_Coins_count_0"));
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_1"));
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_2"));
-            _turretFrames.Add(GameObject.Find("Frame_Coins_count_3"));
         }
     }
 }

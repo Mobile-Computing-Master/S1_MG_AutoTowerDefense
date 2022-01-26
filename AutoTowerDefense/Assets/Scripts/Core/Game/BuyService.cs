@@ -68,7 +68,7 @@ namespace Core.Game
                 var boughtElement = _buyPreviewElement;
                 _buyPreviewElement = null;
 
-                return boughtElement;   
+                return boughtElement;
             }
 
             throw new Exception("Not enough money :-)");

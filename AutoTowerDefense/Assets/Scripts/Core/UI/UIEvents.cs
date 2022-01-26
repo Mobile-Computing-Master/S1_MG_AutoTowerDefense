@@ -2,6 +2,7 @@ using System;
 using Core.Enums;
 using Core.Game;
 using Core.Interfaces;
+using Core.UI.Components;
 using Turrets;
 using Turrets.Utils;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Core.UI
         private TurretRoller _turretRoller;
         private TurretRepository _turretRepository;
         private BankService _bankService;
+        private const string TurretFrameName = "turretFrame_";
 
         private void Start()
         {
@@ -32,12 +34,16 @@ namespace Core.UI
 
         public void InitiateTurretDragBuy(int slot)
         {
+            _uiController.SetActiveSlot(slot);
+            
             // Clear existing buy previews
             _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
             
             var go = _turretRoller.GetTurretPrefabBySlot(slot);
 
+            if (SlotAlreadyBought(slot)) return;
+            
             if (!_bankService.CanAfford(TurretPrices.GetPriceByTurretType(go.GetComponent<TurretBase>().Type))) return;
 
             _uiController.CloseMainSideDrawer();
@@ -52,7 +58,7 @@ namespace Core.UI
             _buyService.StartUiElementDrag(spawnedGameObject);
             _buyService.SetElementForBuyPreview(spawnedGameObject);
         }
-        
+
         public void EndTurretDragBuy()
         {
             if (_buyService.DraggedElement is null) return;
@@ -77,6 +83,9 @@ namespace Core.UI
         public void ConfirmDragBuy()
         {
             var boughtItem = _buyService.BuyPreviewedElement();
+            DisableSlot(_uiController.GetActiveSlot());
+            
+            _uiController.SetActiveSlot(-1);
             _turretRepository.AddTurret(boughtItem);
             _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
@@ -84,8 +93,22 @@ namespace Core.UI
 
         public void DeclineDragBuy()
         {
+            _uiController.SetActiveSlot(-1);
+
             _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
+        }
+        
+        private bool SlotAlreadyBought(int slot)
+        {
+            var locker = GameObject.Find($"{TurretFrameName}{slot}").GetComponent<TurretFrameLocker>();
+            return locker.GetAlreadyBought();
+        }
+
+        private void DisableSlot(int slot)
+        {
+            var locker = GameObject.Find($"{TurretFrameName}{slot}").GetComponent<TurretFrameLocker>();
+            locker.SetAlreadyBought(true);
         }
         
         private void Initiate()
