@@ -11,6 +11,7 @@ namespace Mobs
         public float creepsPerSecond = 1f;
         public int roundSize = 10;
         public List<GameObject> creepPrefabs = new List<GameObject>();
+        private float HpMultiplier { get; set; } = 1f;
         private float _creepCooldown = 0f;
         private Queue<int> _spawnQueue = new Queue<int>();
         private bool _firstRound = true;
@@ -23,8 +24,10 @@ namespace Mobs
 
             if (!(_creepCooldown >= 1 / creepsPerSecond)) return;
             
-            var t = Instantiate(creepPrefabs[_spawnQueue.Dequeue()], pathMap.creepSpawnPoint, Quaternion.identity);
-            t.GetComponent<CreepBase>().Path = pathMap;
+            var go = Instantiate(creepPrefabs[_spawnQueue.Dequeue()], pathMap.creepSpawnPoint, Quaternion.identity);
+            var c = go.GetComponent<CreepBase>();
+            c.Path = pathMap;
+            c.hp *= HpMultiplier;
             _creepCooldown = 0;
         }
 
@@ -40,6 +43,7 @@ namespace Mobs
             {
                 max = creepPrefabs.Count;
                 creepsPerSecond = creepsPerSecond < 2.5f ? creepsPerSecond * 1.1f : creepsPerSecond;
+                HpMultiplier = HpMultiplier < 2f ? HpMultiplier * 1.1f : HpMultiplier;
             }
 
             var random = new Random();
