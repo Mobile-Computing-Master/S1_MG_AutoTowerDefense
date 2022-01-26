@@ -22,7 +22,7 @@ namespace Projectiles
             if (other.gameObject.GetInstanceID() != target.GetInstanceID()) return;
             if (target == null) return;
             
-            target.GetComponent<Creep>().hp -= damage;
+            target.GetComponent<CreepBase>().hp -= damage;
             Destroy(gameObject);
         }
 

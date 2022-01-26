@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using Path;
 using UnityEngine;
 
 namespace Mobs
 {
-    public class Creep : MonoBehaviour
+    public abstract class CreepBase : MonoBehaviour
     {
         public PathMap Path { get; set; }
         public float speed = 1;

@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2671708991668352100}
-  - component: {fileID: 7721847572984294849}
   - component: {fileID: 8282762839158080626}
   - component: {fileID: 5877354736211763298}
   - component: {fileID: 6758751197152264530}
+  - component: {fileID: -2318173968851664635}
   m_Layer: 30
-  m_Name: CreepDummy
+  m_Name: StandardCreep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,20 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7721847572984294849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892250166903354656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c9e9fad9f861f408acaa71139b061b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  hp: 100
 --- !u!212 &8282762839158080626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -147,6 +133,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2318173968851664635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892250166903354656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe780b24124243369c9d8b5365b17fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  hp: 100
 --- !u!1 &5097437602397865385
 GameObject:
   m_ObjectHideFlags: 0

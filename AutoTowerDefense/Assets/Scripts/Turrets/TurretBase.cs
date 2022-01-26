@@ -81,7 +81,7 @@ namespace Turrets
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.GetComponent<Creep>() == null) return;
+            if (other.gameObject.GetComponent<CreepBase>() == null) return;
             if (InRange.Contains(other.gameObject)) return;
             
             InRange.Add(other.gameObject);
@@ -89,7 +89,7 @@ namespace Turrets
         
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.GetComponent<Creep>() == null) return;
+            if (other.gameObject.GetComponent<CreepBase>() == null) return;
             if (!InRange.Contains(other.gameObject)) return;
             
             InRange.Remove(other.gameObject);
