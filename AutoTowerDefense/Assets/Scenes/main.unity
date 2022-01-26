@@ -11119,6 +11119,7 @@ GameObject:
   - component: {fileID: 1239636289}
   - component: {fileID: 1239636290}
   - component: {fileID: 1239636291}
+  - component: {fileID: 1239636292}
   m_Layer: 0
   m_Name: Context
   m_TagString: Untagged
@@ -11221,6 +11222,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a8f9fc611644199022c2d3815abe91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1239636292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239636284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3245083f4646c394dbbac63ea17b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenRounds: 10
+  creepIncreaseMultiplier: 1.5
 --- !u!1 &1466291558
 GameObject:
   m_ObjectHideFlags: 0
@@ -12049,7 +12064,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18230e5b7f2b1064999a7eeec93a6180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creepPrefab: {fileID: 1892250166903354656, guid: fd63d13ef62ebae41bc9688fc89177dd,
-    type: 3}
   pathMap: {fileID: 495099758}
   creepsPerSecond: 0.7
+  roundSize: 10
+  creepPrefabs:
+  - {fileID: 1892250166903354656, guid: 262c68f365f08c34b892e95c734abd80, type: 3}
+  - {fileID: 1892250166903354656, guid: d1c19cfe6771e3a4d9b1c2fae43b7cf4, type: 3}
+  - {fileID: 1892250166903354656, guid: 740fda3ee341fac4d9d7df8db95afeae, type: 3}
