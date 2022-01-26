@@ -10,13 +10,13 @@ TextureImporter:
     second: UI_Wood_Flat_1
   - first:
       213: 5028691757736502005
-    second: UI_Wood_Flat_2
+    second: half_heart
   - first:
       213: 7896532015447207788
     second: UI_Wood_Flat_3
   - first:
       213: -8735736400714684711
-    second: UI_Wood_Flat_4
+    second: full_heart
   - first:
       213: 6090597072225850594
     second: UI_Wood_Flat_5
@@ -250,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Wood_Flat_2
+      name: half_heart
       rect:
         serializedVersion: 2
         x: 160
@@ -292,7 +292,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Wood_Flat_4
+      name: full_heart
       rect:
         serializedVersion: 2
         x: 208
