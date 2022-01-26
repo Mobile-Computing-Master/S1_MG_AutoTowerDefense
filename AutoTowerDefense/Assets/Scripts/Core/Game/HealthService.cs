@@ -16,6 +16,7 @@ namespace Core.Game
         private void Start()
         {
             _path = GameObject.Find("Path").GetComponent<PathMap>();
+            OnHealthChanged?.Invoke(health);
         }
 
         private void Update()
@@ -27,12 +28,10 @@ namespace Core.Game
                 if (!col.gameObject.TryGetComponent<CreepBase>(out var creep)) continue;
                 
                 Destroy(creep.gameObject);
-                health -= 1;
+                health = health > 0 ? health - 1 : 0;
                 OnHealthChanged?.Invoke(health);
                 if (health == 0) OnPlayerDied?.Invoke();
             }
-            
-
         }
     }
 }
