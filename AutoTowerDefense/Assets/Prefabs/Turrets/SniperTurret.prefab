@@ -184,12 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552662da83be40178288b34816c2ccbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 50
+  range: 100
   hitsPerSecond: 0.5
   active: 0
   projectilePrefab: {fileID: 0}
   tier: 1
-  damage: 100
+  damage: 45
 --- !u!1 &4209312420009830893
 GameObject:
   m_ObjectHideFlags: 0

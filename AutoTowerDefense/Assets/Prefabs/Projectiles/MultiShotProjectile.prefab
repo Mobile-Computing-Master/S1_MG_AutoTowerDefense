@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9211449844923844960}
   - component: {fileID: 8572900386404331460}
   - component: {fileID: -9074977857170977744}
-  - component: {fileID: -4632601341082585277}
+  - component: {fileID: -217128747513497823}
   m_Layer: 0
-  m_Name: BasicProjectile
+  m_Name: MultiShotProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-4632601341082585277
+--- !u!114 &-217128747513497823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,11 +90,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3796866511622362557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f149a064d034042a44f18d3b357c49, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ed090bfd4bb4c36bd12ce5cbbd98417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 600
-  damage: 25
+  damage: 20
   target: {fileID: 0}
 --- !u!1 &4898702203990962974
 GameObject:

@@ -9,14 +9,14 @@ namespace Turrets.Utils
         private static readonly Dictionary<TurretType, uint> _priceMap = new Dictionary<TurretType, uint>()
         {
             { TurretType.None, 0 },
-            { TurretType.Basic, 1 },
-            { TurretType.Multi, 2 },
-            { TurretType.Freeze, 3 },
-            { TurretType.Moab, 4 },
-            { TurretType.Sniper, 5 },
+            { TurretType.Basic, 4 },
+            { TurretType.Multi, 6 },
+            { TurretType.Freeze, 12 },
+            { TurretType.Moab, 7 },
+            { TurretType.Sniper, 10 },
             { TurretType.Hazard, 6 },
-            { TurretType.DamageBuff, 7 },
-            { TurretType.ReloadBuff, 8 },
+            { TurretType.DamageBuff, 5 },
+            { TurretType.ReloadBuff, 5 },
             { TurretType.MoneyFarm, 9 }
         };
 

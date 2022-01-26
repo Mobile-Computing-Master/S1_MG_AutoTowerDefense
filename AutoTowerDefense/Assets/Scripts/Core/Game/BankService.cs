@@ -9,7 +9,7 @@ namespace Core.Game
         public delegate void BalanceChanged(uint balance);
         public event BalanceChanged OnBalanceChanged;
         
-        private uint _balance = 10;
+        private uint _balance = 20;
 
         private GameObject _balanceDisplay;
         private const string BalanceDisplayName = "coin_amount";

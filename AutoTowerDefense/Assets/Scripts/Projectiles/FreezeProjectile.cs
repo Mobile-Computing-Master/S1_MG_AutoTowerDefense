@@ -12,7 +12,7 @@ namespace Projectiles
             
             var creep = target.GetComponent<CreepBase>();
             creep.hp -= damage;
-            creep.speed = creep.speed > 0.5 ? creep.speed *= 0.99f : creep.speed;
+            creep.speed = creep.speed > 0.5 ? creep.speed *= 0.995f : creep.speed;
             Destroy(gameObject);
         }
     }

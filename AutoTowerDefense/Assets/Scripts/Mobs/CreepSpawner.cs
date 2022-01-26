@@ -8,11 +8,12 @@ namespace Mobs
     public class CreepSpawner : MonoBehaviour
     {
         public PathMap pathMap;
-        public float creepsPerSecond = 0.5f;
+        public float creepsPerSecond = 1f;
         public int roundSize = 10;
         public List<GameObject> creepPrefabs = new List<GameObject>();
-        private float _creepCooldown = 0.25f;
-        private Queue<int> _spawnQueue = new Queue<int>(); 
+        private float _creepCooldown = 0f;
+        private Queue<int> _spawnQueue = new Queue<int>();
+        private bool _firstRound = true;
 
         private void Update()
         {
@@ -29,7 +30,18 @@ namespace Mobs
 
         public void FillCreepQueue()
         {
-            var max = creepPrefabs.Count;
+            var max = 0;
+            if (_firstRound)
+            {
+                max = 0;
+                _firstRound = false;
+            }
+            else
+            {
+                max = creepPrefabs.Count;
+                creepsPerSecond = creepsPerSecond < 2.5f ? creepsPerSecond * 1.1f : creepsPerSecond;
+            }
+
             var random = new Random();
             var queue = new Queue<int>();
             for (var i = 0; i < roundSize; i++)

@@ -33,12 +33,9 @@ namespace Mobs
                 _currentPointIndex++;
             }
 
-            if (hp <= 0)
-            {
-                // TODO: Fix me
-                _bankService.Add(2);
-                Destroy(gameObject);
-            }
+            if (!(hp <= 0)) return;
+            _bankService.Add(1);
+            Destroy(gameObject);
         }
         
         private void Initiate()
