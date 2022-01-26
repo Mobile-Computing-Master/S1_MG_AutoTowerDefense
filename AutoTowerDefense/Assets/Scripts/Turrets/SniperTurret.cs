@@ -33,7 +33,7 @@ namespace Turrets
                 _ => throw new ArgumentOutOfRangeException()
             };
             
-            target.GetComponent<Creep>().hp -= damage;
+            target.GetComponent<CreepBase>().hp -= damage;
         }
         
         private GameObject GetFurthestCreep ()

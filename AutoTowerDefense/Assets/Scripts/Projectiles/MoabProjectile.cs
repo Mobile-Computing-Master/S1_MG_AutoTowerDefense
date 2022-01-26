@@ -7,7 +7,7 @@ namespace Projectiles
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out Creep creep)) return;
+            if (!other.TryGetComponent(out CreepBase creep)) return;
             
             creep.hp -= damage;
             Destroy(gameObject);
