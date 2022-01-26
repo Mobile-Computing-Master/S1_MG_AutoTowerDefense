@@ -14,6 +14,7 @@ namespace Core.Game
     {
         public int numberOfSlots = 3;
         public List<GameObject> turretPrefabs = new List<GameObject>();
+        public List<GameObject> turretPreviewPrefabs = new List<GameObject>();
 
         public delegate void RollChange(List<GameObject> turretPrefabs);
 
@@ -23,6 +24,7 @@ namespace Core.Game
         
         private readonly List<GameObject>rolledTurrets = new List<GameObject>() {null, null, null};
         private const string TurretFrameName = "turretFrame_";
+        private const string TurretPreviewName = "PreviewWrapper_";
 
         private void Start()
         {
@@ -47,6 +49,7 @@ namespace Core.Game
                 rolledTurrets[i] = turretPrefabs[r.Next(0, turretPrefabs.Count)];
             }
             
+            SetTurretPreviews();
             OnRollChanged?.Invoke(rolledTurrets);
         }
         
@@ -55,6 +58,25 @@ namespace Core.Game
             for (int i = 0; i <numberOfSlots; i++)
             {
                 GameObject.Find($"{TurretFrameName}{i}").GetComponent<TurretFrameLocker>().SetAlreadyBought(false);
+            }
+        }
+
+        private void SetTurretPreviews()
+        {
+            for (int i = 0; i <numberOfSlots; i++)
+            {
+                var preview = GameObject.Find($"{TurretPreviewName}{i}");
+                
+                if (preview.transform.childCount > 0)
+                {
+                    var child = preview.transform.GetChild(0);
+                    Destroy(child.gameObject);
+                }
+
+                var turretToPreview = turretPreviewPrefabs.Find(p => p.gameObject.name.Contains(GetTurretPrefabBySlot(i).gameObject.name));
+
+                var previewed = Instantiate(turretToPreview, preview.transform);
+                previewed.GetComponent<RectTransform>().localScale = new Vector3(0.8f, 0.8f, 1);
             }
         }
     }
