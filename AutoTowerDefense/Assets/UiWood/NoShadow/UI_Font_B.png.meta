@@ -205,7 +205,7 @@ TextureImporter:
     second: UI_Font_B_66
   - first:
       213: -453728477866861386
-    second: UI_Font_B_67
+    second: questionmark
   - first:
       213: 1041832157616954065
     second: UI_Font_B_68
@@ -2596,7 +2596,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Font_B_67
+      name: questionmark
       rect:
         serializedVersion: 2
         x: 458
