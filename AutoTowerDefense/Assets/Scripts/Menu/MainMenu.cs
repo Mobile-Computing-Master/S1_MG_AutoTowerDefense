@@ -15,8 +15,14 @@ namespace Menu
 
         public void StartMap(int mapNumber)
         {
-            // TODO: Add other maps
-            SceneManager.LoadScene("Scenes/main");
+            if (mapNumber == 1)
+            {
+                SceneManager.LoadScene("Scenes/main");
+            }
+            else
+            {
+                SceneManager.LoadScene("Scenes/main_1");
+            }
         }
 
         public void Exit()
