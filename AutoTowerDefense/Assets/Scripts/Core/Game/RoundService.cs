@@ -6,7 +6,7 @@ namespace Core.Game
 {
     public class RoundService : MonoBehaviour
     {
-        public float timeBetweenRounds = 10f;
+        public float timeBetweenRounds = 5f;
         public float creepIncreaseMultiplier = 1.5f;
         
         private CreepSpawner _spawner;

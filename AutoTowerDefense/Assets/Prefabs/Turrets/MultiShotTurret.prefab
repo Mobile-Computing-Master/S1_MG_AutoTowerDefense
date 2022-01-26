@@ -184,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c661fe0358f219c4faba4314ac2f11d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4
+  range: 2
   hitsPerSecond: 0.5
   active: 0
-  projectilePrefab: {fileID: 3796866511622362557, guid: 6ad06aba4f027cd4fb1a11b4474cfc4c,
+  projectilePrefab: {fileID: 3796866511622362557, guid: 2fb50436f7f61c04e943043576aae73c,
     type: 3}
   tier: 1
 --- !u!1 &4209312420009830893

@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  hitsPerSecond: 2
+  hitsPerSecond: 0
   active: 0
   projectilePrefab: {fileID: 0}
   tier: 1
