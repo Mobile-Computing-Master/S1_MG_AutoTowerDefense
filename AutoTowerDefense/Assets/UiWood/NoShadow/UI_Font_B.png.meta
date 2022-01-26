@@ -505,7 +505,7 @@ TextureImporter:
     second: UI_Font_B_166
   - first:
       213: -5111302619771491273
-    second: UI_Font_B_167
+    second: reroll
   - first:
       213: -4719542969630770725
     second: UI_Font_B_168
@@ -4696,7 +4696,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Font_B_167
+      name: reroll
       rect:
         serializedVersion: 2
         x: 328

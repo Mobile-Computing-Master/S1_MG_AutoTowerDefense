@@ -98,6 +98,16 @@ namespace Core.UI
             _buyService.CancelBuyPreview();
             _uiController.HideTurretConfirmPopover();
         }
+
+        public void Reroll()
+        {
+            if (!_bankService.CanAfford(_turretRoller.rerollCosts)) return;
+
+            if (_bankService.TryWithdraw(_turretRoller.rerollCosts))
+            {
+                _turretRoller.RollTurrets();
+            }
+        }
         
         private bool SlotAlreadyBought(int slot)
         {

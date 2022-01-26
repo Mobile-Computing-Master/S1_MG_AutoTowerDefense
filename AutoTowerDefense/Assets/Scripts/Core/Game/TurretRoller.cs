@@ -17,6 +17,8 @@ namespace Core.Game
         public delegate void RollChange(List<GameObject> turretPrefabs);
 
         public event RollChange OnRollChanged;
+
+        public uint rerollCosts = 2;
         
         private readonly List<GameObject>rolledTurrets = new List<GameObject>() {null, null, null};
 
