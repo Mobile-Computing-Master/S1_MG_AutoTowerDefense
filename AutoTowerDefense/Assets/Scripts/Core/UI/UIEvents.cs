@@ -105,16 +105,8 @@ namespace Core.UI
 
             if (_bankService.TryWithdraw(_turretRoller.rerollCosts))
             {
-                ResetTurretSlots();
+                _turretRoller.ResetTurretSlots();
                 _turretRoller.RollTurrets();
-            }
-        }
-
-        private void ResetTurretSlots()
-        {
-            for (int i = 0; i < _turretRoller.numberOfSlots; i++)
-            {
-                GameObject.Find($"{TurretFrameName}{i}").GetComponent<TurretFrameLocker>().SetAlreadyBought(false);
             }
         }
 

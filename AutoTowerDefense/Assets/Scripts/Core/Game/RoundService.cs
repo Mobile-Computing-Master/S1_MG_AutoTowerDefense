@@ -14,10 +14,13 @@ namespace Core.Game
         private HealthService _healthService;
         private bool _playerDied = false;
 
+        private TurretRoller _turretRoller;
+
         private void Start()
         {
             _spawner = GameObject.Find("Spawner").GetComponent<CreepSpawner>();
             _healthService = GameObject.Find("Context").GetComponent<HealthService>();
+            _turretRoller = GameObject.Find("Context").GetComponent<TurretRoller>();
             _spawner.FillCreepQueue();
             _healthService.OnPlayerDied += OnPlayerDied;
         }
@@ -28,6 +31,9 @@ namespace Core.Game
             var creeps = FindObjectsOfType<CreepBase>();
             if (creeps.Length > 0) return;
 
+            _turretRoller.ResetTurretSlots();
+            _turretRoller.RollTurrets();
+            
             _roundCooldown += Time.deltaTime;
             if (_roundCooldown < timeBetweenRounds) return;
 

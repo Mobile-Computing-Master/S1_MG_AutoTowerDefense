@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Core.Enums;
+using Core.UI.Components;
 using Turrets;
 using UnityEngine;
 using Random = System.Random;
@@ -21,10 +22,11 @@ namespace Core.Game
         public uint rerollCosts = 2;
         
         private readonly List<GameObject>rolledTurrets = new List<GameObject>() {null, null, null};
+        private const string TurretFrameName = "turretFrame_";
 
         private void Start()
         {
-            if (turretPrefabs.Count < 6) throw new Exception("Add at all turrets to turret roller before starting");
+            if (turretPrefabs.Count < 8) throw new Exception("Add at all turrets to turret roller before starting");
             
             RollTurrets();
         }
@@ -46,6 +48,14 @@ namespace Core.Game
             }
             
             OnRollChanged?.Invoke(rolledTurrets);
+        }
+        
+        public void ResetTurretSlots()
+        {
+            for (int i = 0; i <numberOfSlots; i++)
+            {
+                GameObject.Find($"{TurretFrameName}{i}").GetComponent<TurretFrameLocker>().SetAlreadyBought(false);
+            }
         }
     }
 }
