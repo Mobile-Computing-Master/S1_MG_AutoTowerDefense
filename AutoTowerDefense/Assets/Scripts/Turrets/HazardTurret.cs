@@ -27,15 +27,15 @@ namespace Turrets
 
         protected override void Shoot(GameObject target)
         {
-            damage = tier switch
-            {
+            var scaledDamage = tier switch
+                {
                 TurretTier.Tier1 => damage * DamageMultiplier,
                 TurretTier.Tier2 => damage * DamageMultiplier * 1.25f,
                 TurretTier.Tier3 => damage * DamageMultiplier * 1.5f,
                 _ => throw new ArgumentOutOfRangeException()
             };
             
-            target.GetComponent<CreepBase>().hp -= damage;
+            target.GetComponent<CreepBase>().hp -= scaledDamage;
         }
     }
 }
