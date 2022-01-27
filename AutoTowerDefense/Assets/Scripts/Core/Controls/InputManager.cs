@@ -24,7 +24,7 @@ namespace Core.Controls
         private float _initialZoomDistance;
         private bool _isDragging;
 
-        private void Awake()
+        private void OnEnable()
         {
             EnhancedTouchSupport.Enable();
             _mainCamera = Camera.main;
@@ -78,8 +78,6 @@ namespace Core.Controls
         {
             if (touch.phase == TouchPhase.Began)
             {
-                ResetElementsForCameraMove();
-
                 _startDrag = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
                 _isDragging = true;
             }
@@ -90,6 +88,8 @@ namespace Core.Controls
             
             if (touch.phase == TouchPhase.Moved)
             {
+                ResetElementsForCameraMove();
+
                 var currentPos = _mainCamera.ScreenToWorldPoint(touch.screenPosition);
 
                 var delta = _startDrag - currentPos;
