@@ -31,6 +31,7 @@ namespace Core.UI
 
         private TurretRoller _turretRoller;
         private HealthService _healthService;
+        private RoundService _roundsService;
 
         private int _activeSlot = -1;
         
@@ -52,8 +53,7 @@ namespace Core.UI
 
         private void HealthServiceOnOnPlayerDied()
         {
-            // TODO: Fix number of rounds
-            ShowGameOver(1);
+            ShowGameOver(_roundsService.Rounds);
         }
 
         public void OpenMainSideDrawer()
@@ -154,9 +154,11 @@ namespace Core.UI
             
             _trash = GameObject.Find("Trash");
             _trashRect = _trash.GetComponent<RectTransform>();
-            
-            _turretRoller = GameObject.Find("Context").GetComponent<TurretRoller>();
-            _healthService = GameObject.Find("Context").GetComponent<HealthService>();
+
+            var context = GameObject.Find("Context"); 
+            _turretRoller = context.GetComponent<TurretRoller>();
+            _healthService = context.GetComponent<HealthService>();
+            _roundsService = context.GetComponent<RoundService>();
             
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_0"));
             _turretFrames.Add(GameObject.Find("Frame_Coins_count_1"));

@@ -13,18 +13,14 @@ namespace Core.UI.Components
     {
         public int slot = 0;
         private bool _alreadyBought = false;
-        private TurretRoller _turretRoller;
-        private BankService _bankService;
         private readonly Color _shade = new Color(0.4f, 0.4f, 0.4f, 1);
         private readonly Color _noShade = new Color(1, 1, 1, 1);
         private string CoinName = "Coins";
 
-        private void OnEnable()
+        private void Start()
         {
-            Initiate();
-            
-            _turretRoller.OnRollChanged += TurretRollerOnOnRollChanged;
-            _bankService.OnBalanceChanged += BankServiceOnBalanceChanged;
+            GameObject.Find("Context").GetComponent<TurretRoller>().OnRollChanged += TurretRollerOnOnRollChanged;
+            GameObject.Find("Context").GetComponent<BankService>().OnBalanceChanged += BankServiceOnBalanceChanged;
         }
 
         public void SetAlreadyBought(bool bought)
@@ -47,12 +43,12 @@ namespace Core.UI.Components
         
         private void TurretRollerOnOnRollChanged(List<GameObject> turretPrefabs)
         {
-            BankServiceOnBalanceChanged(_bankService.GetBalance());
+            BankServiceOnBalanceChanged(GameObject.Find("Context").GetComponent<BankService>().GetBalance());
         }
         
         private void BankServiceOnBalanceChanged(uint balance)
         {
-            var price = TurretPrices.GetPriceByTurretType(_turretRoller.GetTurretPrefabBySlot(slot).GetComponent<TurretBase>().Type);
+            var price = TurretPrices.GetPriceByTurretType(GameObject.Find("Context").GetComponent<TurretRoller>().GetTurretPrefabBySlot(slot).GetComponent<TurretBase>().Type);
 
             if (price > balance && !_alreadyBought)
             {
@@ -63,13 +59,6 @@ namespace Core.UI.Components
                 gameObject.GetComponent<Image>().color = _noShade;
 
             }
-        }
-
-        private void Initiate()
-        {
-            var context = GameObject.Find("Context");
-            _turretRoller = context.GetComponent<TurretRoller>();
-            _bankService = context.GetComponent<BankService>();
         }
     }
 }

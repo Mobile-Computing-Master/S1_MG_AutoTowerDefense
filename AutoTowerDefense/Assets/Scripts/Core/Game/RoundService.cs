@@ -8,13 +8,14 @@ namespace Core.Game
     {
         public float timeBetweenRounds = 5f;
         public float creepIncreaseMultiplier = 1.5f;
+        public int Rounds { get; set; } = 0;
         
         private CreepSpawner _spawner;
         private float _roundCooldown = 0f;
         private HealthService _healthService;
         private bool _playerDied = false;
 
-        private bool _shouldRoll = false;
+        private bool _shouldRoll = true;
 
         private TurretRoller _turretRoller;
 
@@ -35,6 +36,7 @@ namespace Core.Game
 
             if (_shouldRoll)
             {
+                Rounds++;
                 _turretRoller.ResetTurretSlots();
                 _turretRoller.RollTurrets();
                 _shouldRoll = false;

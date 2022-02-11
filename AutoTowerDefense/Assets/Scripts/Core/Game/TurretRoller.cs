@@ -26,7 +26,7 @@ namespace Core.Game
         private const string TurretFrameName = "turretFrame_";
         private const string TurretPreviewName = "PreviewWrapper_";
 
-        private void Start()
+        private void OnEnable()
         {
             if (turretPrefabs.Count < 8) throw new Exception("Add at all turrets to turret roller before starting");
             

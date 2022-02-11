@@ -13,7 +13,7 @@ namespace Mobs
         private int _currentPointIndex = 0;
         private BankService _bankService;
 
-        private void OnEnable()
+        private void Start()
         {
             Initiate();
         }
@@ -33,7 +33,7 @@ namespace Mobs
                 _currentPointIndex++;
             }
 
-            if (!(hp <= 0)) return;
+            if (hp > 0) return;
             _bankService.Add(1);
             Destroy(gameObject);
         }

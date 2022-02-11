@@ -9,7 +9,7 @@ namespace Core.Game
         public delegate void BalanceChanged(uint balance);
         public event BalanceChanged OnBalanceChanged;
         
-        private uint _balance = 20;
+        public uint balance = 20;
 
         private GameObject _balanceDisplay;
         private const string BalanceDisplayName = "coin_amount";
@@ -22,12 +22,12 @@ namespace Core.Game
 
         public uint GetBalance()
         {
-            return _balance;
+            return balance;
         }
 
         public void Add(uint amount)
         {
-            _balance += amount;
+            balance += amount;
             UpdateBalanceDisplay();
         }
 
@@ -36,7 +36,7 @@ namespace Core.Game
 
             try
             {
-                _balance -= amount;
+                balance -= amount;
                 UpdateBalanceDisplay();
 
                 return true;
@@ -49,13 +49,13 @@ namespace Core.Game
 
         public bool CanAfford(uint amount)
         {
-            return _balance >= amount;
+            return balance >= amount;
         }
         
         private void UpdateBalanceDisplay()
         {
-            OnBalanceChanged?.Invoke(_balance);
-            _balanceDisplay.GetComponent<Text>().text = _balance.ToString();
+            OnBalanceChanged?.Invoke(balance);
+            _balanceDisplay.GetComponent<Text>().text = balance.ToString();
         }
         
         private void Initiate()
