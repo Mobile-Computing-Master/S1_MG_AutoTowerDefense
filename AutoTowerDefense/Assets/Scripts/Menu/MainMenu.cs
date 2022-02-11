@@ -17,11 +17,11 @@ namespace Menu
         {
             if (mapNumber == 0)
             {
-                SceneManager.LoadScene("Scenes/main");
+                SceneManager.LoadScene("Scenes/map_1");
             }
             else
             {
-                SceneManager.LoadScene("Scenes/main_1");
+                SceneManager.LoadScene("Scenes/map_2");
             }
         }
 
